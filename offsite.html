@@ -139,7 +139,7 @@
                     $scope.pagetext.clueOptionsAnswered = Util.getFromLocalStorage("STORE-clueOptionsAnswered");
                 }
 
-                if (!$scope.pagetext.clueOptionsAnswered) {
+                if ($scope.pagetext && !$scope.pagetext.clueOptionsAnswered) {
                     $scope.pagetext.clueOptionsAnswered = {};
                 }
             }
