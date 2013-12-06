@@ -6,9 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
     <meta name="description" content="Offsite 2013 : " />
 
-     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/offsite.css">     
+    <meta name="viewport"
+        content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/offsite.css">     
     <script src="javascripts/offsite.js"></script>
     <script src="javascripts/main.js"></script>
+    <script src="javascripts/bookmark_bubble.js"></script>
     <title>Offsite 2013</title>
 </head>
 
@@ -30,12 +35,13 @@
         <section id="main_content" class="inner">
             <h3>
                 <a name="welcome-to-offsite-2013" class="anchor" href="#welcome-to-offsite-2013"><span class="octicon octicon-link"></span></a>Welcome to Offsite 2013.</h3>
-
-            <p>This automatic page generator is the easiest way to create beautiful pages for all of your projects. Author your page content here using GitHub Flavored Markdown, select a template crafted by a designer, and publish. After your page is generated, you can check out the new branch:</p>
+                <p>Hello All to Offsite</p>
         </section>
     </div>
 
+    <input type="button" ng-click="addToHomeScreen()" value="Add to Home" />
     <input type="button" onclick="localStorage.clear()" value="Clear" />
+
     <div style="background-color:#0094ff" ng-hide="pagetext">        
         Please enter the passcode : 
         <input id="password1" ng-model="passCode" type="password"/>
@@ -133,7 +139,7 @@
                     $scope.pagetext.selectedOption = Util.getFromLocalStorage("STORE-selectedOptionClueNo");
                     $scope.pagetext.clueOptionsAnswered = Util.getFromLocalStorage("STORE-clueOptionsAnswered");
                 }
-                else if($scope.pagetext) {
+                else if ($scope.pagetext) {
                     //$scope.pagetext.selectedOption = $scope.pagetext.clueOptions[Util.getFromLocalStorage("STORE-selectedOptionClueNo")];
                     $scope.pagetext.selectedOption = Util.getFromLocalStorage("STORE-selectedOptionClueNo");
                     $scope.pagetext.clueOptionsAnswered = Util.getFromLocalStorage("STORE-clueOptionsAnswered");
@@ -144,14 +150,49 @@
                 }
             }
 
+            $scope.addToHomeScreen = function() {
+                var bubble = new google.bookmarkbubble.Bubble();
+                var parameter = null;
+
+                bubble.hasHashParameter = function () {
+                    return location.hash == "" && location.href.indexOf(parameter) == location.href.length - 1;
+                };
+
+                bubble.setHashParameter = function () {
+                    if (!this.hasHashParameter()) {
+                        location.href = parameter;
+                    }
+                };
+
+                bubble.getViewportHeight = function () {
+                    window.console.log('Example of how to override getViewportHeight.');
+                    return window.innerHeight;
+                };
+
+                bubble.getViewportScrollY = function () {
+                    window.console.log('Example of how to override getViewportScrollY.');
+                    return window.pageYOffset;
+                };
+
+                bubble.registerScrollHandler = function (handler) {
+                    window.console.log('Example of how to override registerScrollHandler.');
+                    window.addEventListener('scroll', handler, false);
+                };
+
+                bubble.deregisterScrollHandler = function (handler) {
+                    window.console.log('Example of how to override deregisterScrollHandler.');
+                    window.removeEventListener('scroll', handler, false);
+                };
+                alert(bubble.showIfAllowed());
+            }
+
             $scope.resetForNextClue = function () {
                 $scope.pagetext.currentAnswer = null;
                 $scope.pagetext.nextClue = false;
                 Util.setToLocalStorage("STORE-selectedOptionClueNo", $scope.pagetext.selectedOption);
             }
 
-            $scope.validateAnswer = function (answer)
-            {
+            $scope.validateAnswer = function (answer) {
                 var selectedClue = $scope.pagetext.clueOptions[$scope.pagetext.selectedOption];
 
                 var deAnswer = Tea.decrypt(selectedClue.answer, answer);
@@ -164,15 +205,13 @@
                     Util.setToLocalStorage("STORE-clueOptionsAnswered", $scope.pagetext.clueOptionsAnswered);
                     Util.setToLocalStorage("STORE-selectedOptionClueNo", $scope.pagetext.selectedOption);
                 }
-                else
-                {
+                else {
                     $scope.pagetext.submitMessage = $scope.pagetext.errorMessage;
                 }
                 $scope.pagetext.nextClue = true;
             }
 
-            $scope.decryptGame = function (passCode)
-            {
+            $scope.decryptGame = function (passCode) {
                 var gameJSON = null;
                 try {
                     gameJSON = eval("(" + Tea.decrypt($scope.data, passCode) + ")");
@@ -189,11 +228,11 @@
 
 
         var Util = new function () {
-            this.setToLocalStorage = function(key, item) {
+            this.setToLocalStorage = function (key, item) {
                 localStorage.setItem(key, JSON.stringify(item));
             }
 
-            this.getFromLocalStorage = function(key) {
+            this.getFromLocalStorage = function (key) {
                 return JSON.parse(localStorage.getItem(key));
             }
         }
