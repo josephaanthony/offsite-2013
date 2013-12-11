@@ -5,124 +5,197 @@
     <meta charset='utf-8' />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
     <meta name="description" content="Offsite 2013 : " />
-
-    <meta name="viewport"
-        content="width=device-width,minimum-scale=1.0,maximum-scale=1.0" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/offsite.css">     
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/offsite.css">
     <script src="javascripts/offsite.js"></script>
     <script src="javascripts/main.js"></script>
-    <script src="javascripts/bookmark_bubble.js"></script>
+    <!--<script src="javascripts/bookmark_bubble.js"></script>-->
     <title>Offsite 2013</title>
 </head>
 
 <body ng-app ng-controller="GameController" ng-init="init()">
+    <!--    <div class="main_content absolute-center">
+        Hello
+    </div>-->
 
     <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-            <!-- <a id="forkme_banner" href="https://github.com/josephaanthony">View on GitHub</a> -->
-
-            <h1 id="project_title">Offsite 2013</h1>
-            <h2 id="project_tagline"></h2>
-
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-        <section id="main_content" class="inner">
-            <h3>
-                <a name="welcome-to-offsite-2013" class="anchor" href="#welcome-to-offsite-2013"><span class="octicon octicon-link"></span></a>Welcome to Offsite 2013.</h3>
-                <p>Hello All to Offsite</p>
-        </section>
-    </div>
-
     <input type="button" ng-click="addToHomeScreen()" value="Add to Home" />
     <input type="button" onclick="localStorage.clear()" value="Clear" />
 
-    <div style="background-color:#0094ff" ng-hide="pagetext">        
-        Please enter the passcode : 
-        <input id="password1" ng-model="passCode" type="password"/>
-        <input type="submit" value="Enter The Hunt" ng-click="decryptGame(passCode)" />
-    </div>
-
-    <div style="width:100%" ng-show="pagetext">
-        <div style="background-color:#808080; color:#fff; float:left; width:50%">
-            {{pagetext.clueText}}
-            <!--<select ng-model="pagetext.selectedOption" ng-options="c as c.clueNo for c in pagetext.clueOptions" ng-change="resetForNextClue()"></select>-->
-            <select ng-model="pagetext.selectedOption" ng-options="k as k for (k,v) in pagetext.clueOptions" ng-change="resetForNextClue()"></select>
-<!--            <select ng-model="pagetext.selectedOption" ng-change="resetForNextClue()">
-                <option ng-repeat="(k,v) in pagetext.clueOptions" value="{{k}}">                
-                    {{k}} - {{ pagetext.selectedOption == k }}
-                </option>
-            </select>-->
-            <div>
-                {{pagetext.clueOptions[pagetext.selectedOption].clue}}
-            </div>
-            <div ng-show="pagetext.selectedOption">
-                Your Answer Here: <input type="text" ng-model="pagetext.currentAnswer" />
-                <input type="submit" value="Validate Answer" ng-click="validateAnswer(pagetext.currentAnswer)" />
-            </div>
-
-            <div ng-show="pagetext.nextClue">
-                {{pagetext.submitMessage}}
-            </div>
-        </div>
-
-        <div style="background-color:#ffd800; color:#fff; float:right; width:50%">
-            Status: {{pagetext.clueOptionsAnswered.length}}
-            <div ng-repeat="(clueNo, opt) in pagetext.clueOptionsAnswered">
-                {{clueNo}} - {{opt.answer}}
-            </div>
+    <div id="header_content_wrap" class="header_wrap">
+        <div>
+            <div class="banner_msg btn" ng-show="showBackButton==true||currentpage==2" ng-click="currentpage=1;showBackButton=false">BACK</div>
+            <div class="banner">Offsite 2013</div>
         </div>
     </div>
 
-<!--    <div>
-        <div class="control-group">
-            <label class="control-label" for="password">Password</label>
-            <div class="controls">
-                <input id="password" type="password"/>
+    <div id="main_content_wrap" class="main_content ">
+        <div id="content_container">
+            <div id="prestart_content" style="margin-top: 20px; width: 100%; position: absolute;">
+                <div>Your hunt starts in </div>
+                <div id="countdown_wrap" class="countdown"></div>
             </div>
-        </div>
-    
-        <div class="control-group">
-            <label class="control-label" for="text" id="text-label">Text</label>
-            <div class="controls">
-                <input id="text" type="text"/>
-            </div>
-        </div>
-    
-        <div class="control-group">
-            <label class="control-label" for="encrypt" id="encrypt-label">Encrypt</label>
-            <div class="controls">
-                <input id="encrypt" type="text"/>
-            </div>
-        </div>
-    </div>-->
 
+            <div id="poststart_content" style="display: none; width: 100%; margin-top: 20px; position: absolute;">
+                <div style="text-align: center" id="welcome_wrap">
+                    <form>
+                        <div>
+                            <input id="password1" ng-model="passCode" type="password" placeholder="type passcode here and.." />
+                        </div>
+                        <input type="submit" value="Let the fun begin.." ng-click="decryptGame(passCode)" />
+                    </form>
+                </div>
 
+                <div style="width: 100%; display: none; text-align: center" id="clue_content_detail">
+                    <div id="maincontent">
+
+                        <div id="categoryOpt" ng-show="currentpage==1">
+
+                            <!-- <select ng-model="pagetext.selectedCategory" 
+                                ng-options="k as k for (k,v) in pagetext.clueOptions"></select>            -->
+
+                            <div ng-repeat="(k,v) in pagetext.clueOptions"
+                                class="categoryDiv btn"
+                                ng-click="CategoryClick(k); ">
+                                {{k}}
+                            </div>
+
+                        </div>
+
+                        <div id="gameOpt" ng-show="currentpage==2">
+                            <!--<select ng-model="pagetext.selectedOption" 
+                            ng-options="k as k for (k,v) in pagetext.selectedCategory" 
+                            ng-change="resetForNextClue(pagetext.selectedCategory, pagetext.selectedOption)"></select>-->
+
+                            <div ng-repeat="(k,v) in pagetext.selectedCategory" class="categoryDiv btn"
+                                ng-click="pagetext.selectedOption=k; OnQuesSelected(pagetext.selectedCategory, k)">
+                                {{k}}
+                            </div>
+
+                        </div>
+
+                        <div id="answer_clue_wrap" ng-show="currentpage==3">
+                            <div>
+                                {{pagetext.clueOptions[pagetext.selectedCategory][pagetext.selectedOption].clue}}
+                            </div>
+                            <div id="ansTyped">
+                                <form>
+                                    Answer is:
+                                <input type="text" ng-model="pagetext.currentAnswer" />
+                                    <input type="submit" value="Validate Answer" ng-click="validateAnswer(pagetext.currentAnswer)" />
+                                </form>
+                            </div>
+                        </div>
+
+                        <div ng-show="pagetext.nextClue">
+                            {{pagetext.submitMessage}}
+                            
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div id="answers">
+                        <div ng-show="pagetext.clueOptionsAnswered">
+                            My Achievements -
+                            <div ng-repeat="(category, options) in pagetext.clueOptionsAnswered"
+                                style="color: red">
+                                Category {{category}}: {{options}}
+                            	<div ng-repeat="opt in parseJSON(options)" style="color: blue">
+                                    {{k}} - {{opt.answer}}
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <script>
+        function StartCountDown() {
+            //var target_date = new Date("Dec 09 2013 15:00:00 GMT+0530").getTime();
+
+
+
+            var target_date = new Date().getTime() + 200;
+            var days, hours, minutes, seconds;
+            var refreshIntervalId = setInterval(function () {
+                var current_date = new Date().getTime();
+                var seconds_left = (target_date - current_date) / 1000;
+                days = parseInt(seconds_left / 86400);
+                seconds_left = seconds_left % 86400;
+
+                hours = parseInt(seconds_left / 3600);
+                seconds_left = seconds_left % 3600;
+
+                minutes = parseInt(seconds_left / 60);
+                seconds = parseInt(seconds_left % 60);
+
+                if (seconds < 0) {
+                    $('#prestart_content').fadeOut(3000);
+                    $('#poststart_content').fadeIn(3000);
+
+                    clearInterval(refreshIntervalId);
+                }
+
+                $('#countdown_wrap').text(days + "d, " + hours + "h, " + minutes + "m, " + seconds + "s");
+
+            }, 1000);
+        }
+
         function GameController($scope) {
             $scope.passCode = null;
-
-            $scope.data = "0xL5/Uq154MJyQR9knTBOS4n7O3NTdBTfYYKx75/YjlP4AX5g4Wjd96wHNnwPAgq4cvvRQm7MVA/4/tD1z5BFw+KGmElECrFbgA+FdkbI7cyEJvoVtw2HFhH6ULe1u3H4mZCoIHVNUFDEYV3vEdMTnyhhOgCL4JpN+1R4UwlQFsitOQb8eK3lwcj9CSGLFS4AhoRoGvn0w7vdaaj0Ws+AEoSPxNoInRWansViSPY5/myop4WS9n7jLfxTwgjJQLFO7zxb5GsVI6JKzPoLnR+3iiYB8nYqIttuBbWVXn2Yyjwr9YWH1MC6FF81+m7rGdtz5CP+0ifzIQFCsg11zkPSITH8OK9HgHREf/UhTIxqt1ZAzyPSA4vW9Y22c/9W1hSLyIkgISe29036jy11dDv28ua37+Uao1+/VvBx6F8cAGc1n0K7AYzSpDCTEXD/ODezeDbws19ODhTxlle9Vh4mQla5vGhsr5KDgEVmhkwk+E9uWLE+MJJq7mPqryu9rrd5glKFZChzhcKHNxCA+YCH0XCKHFIe7aNvJ4RF1+7rsT4LlDOxauOtGr27gZ4iHFG6PIwHlpah+b5ZQYELT1l8+L6HZgfIedRv1ifGAw2zObsnP0MBRM9xe+Yu+6wX/kzgeE+pJbSLgCYHbUKav+0oR0Ei/jU8FZR9ECgpvi/cKbMPT3G/nQUDJ+2pFZI1straclEyfe6b1P/UBYE7K/z4LznYFLvETUTU27wO5jequnDWOGUqG93dMtgO/DWvHJowrRNAnnvP1ucx5bOMrAwPbmzipAuo0/AH9YMEEtwhBI67KZ+rT1/Ot6B4xbDOUPjQiFiyQeX5A+Jz6A4sdtn3TWn/UM3wgzZlrBsG0yhdDqNhzNjLzNhvLIEyNJWH/q12LYEvgFyZQMbOIWWRl4QUxWp+vrKcuiZPk8I4tl67GXmzI55M3qSb9epCP3fVwq7RHwTFdKsu2pz2C/oEiFnIlq2C1NftwTDoAEVK/UMgPmQdiXau+I5k/D8n1ofhrdaLI6v/CwIyVwKL8sK2W6XU56zzd1D6PW5if91gIEe+NM1kxCFbXzxXfqMcCTpxHf6I0IJFRGahfR4F46jW5dJEp2ioe3cvZ5/jrjrNLyAuk+JmA+u2+zeQOBy7AW63Rv9AZtjs8LStgDb8HFLIiPSxUuzP4Y1724zDSzMS07fYYx6G2xDX3+nwbIqlRH2I+561XH+fcXv1S5Rau/do7H6E9lXV4vwEK9eO1bsfRsZbKZgLg18k0hoyczwk4P8fvJASSbq9uqis8U4ra7UDxwBzgJsys3wWk6FERwCFMc6ShdFLs8LqLCgqq7PrVLejC+xLsc9sB14Fbm2R/12OVxz1yKiZa43Bj7rgiNoop/MTdRw8VV1rKO7hNu1B5dtXIPzglcf9xJVYjtbpW4HVzNVE+dPmYYPIZzHOG+POQxmhyKTXVWQzdfWKxkKowjQ4jqIk96Lkhi6gGY4bmOzUBjGivhun522+6v8dP6YlI3ljvDe0nNS";
-
+            //category -1 ,ques-opt -2 , original ques -3
+            $scope.currentpage = 1;
+            $scope.data = "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";
+            $scope.showBackButton = false;
             $scope.pagetext = null;
+
+            $scope.CategoryClick = function (k) {
+                $scope.pagetext.selectedCategory = k;
+                $scope.currentpage = 2;
+                $("#gameOpt").fadeIn(2000);
+            }
 
             //$scope.pagetext = {
             //    clueText: 'Select Your Next Clue',
             //    clueOptions: {
-            //        1: { clueNo: "1", clue: "What is your name1", answer: "NqGSqFQbYknzBQka3T0bLJ1Q1Xs=" },
-            //        2: { clueNo: "2", clue: "What is your name2", answer: "58N/Lkt+ZPvrtzUp7MmaZ2O+QFM=" },
-            //        3: { clueNo: "3", clue: "What is your name3", answer: "L347CupDNcmjBlwsbmtrXbz8EmQ=" },
-            //        4: { clueNo: "4", clue: "What is your name4", answer: "BVWomzU1UMGs9+4AFZlBpapQPFw=" },
-            //        5: { clueNo: "5", clue: "What is your name5", answer: "lg5FDfbXAq9apuxuNHthfThUPnE=" },
-            //        6: { clueNo: "6", clue: "What is your name6", answer: "MxBdWxSAFEqhbZ924e592CWkgpA=" },
+            //        Category1: {
+            //            1: { clue: "What is your name1", answer: "NqGSqFQbYknzBQka3T0bLJ1Q1Xs=" },
+            //            2: { clue: "What is your name2", answer: "58N/Lkt+ZPvrtzUp7MmaZ2O+QFM=" },
+            //            3: { clue: "What is your name3", answer: "L347CupDNcmjBlwsbmtrXbz8EmQ=" },
+            //            4: { clue: "What is your name4", answer: "BVWomzU1UMGs9+4AFZlBpapQPFw=" },
+            //            5: { clue: "What is your name5", answer: "lg5FDfbXAq9apuxuNHthfThUPnE=" },
+            //            6: { clue: "What is your name6", answer: "MxBdWxSAFEqhbZ924e592CWkgpA=" },
+            //        },
+            //        Category2: {
+            //            1: { clue: "What is your name1", answer: "NqGSqFQbYknzBQka3T0bLJ1Q1Xs=" },
+            //            2: { clue: "What is your name2", answer: "58N/Lkt+ZPvrtzUp7MmaZ2O+QFM=" },
+            //            3: { clue: "What is your name3", answer: "L347CupDNcmjBlwsbmtrXbz8EmQ=" },
+            //            4: { clue: "What is your name4", answer: "BVWomzU1UMGs9+4AFZlBpapQPFw=" },
+            //            5: { clue: "What is your name5", answer: "lg5FDfbXAq9apuxuNHthfThUPnE=" },
+            //            6: { clue: "What is your name6", answer: "MxBdWxSAFEqhbZ924e592CWkgpA=" },
+            //        },
+            //        Category3: {
+            //            1: { clue: "What is your name1", answer: "NqGSqFQbYknzBQka3T0bLJ1Q1Xs=" },
+            //            2: { clue: "What is your name2", answer: "58N/Lkt+ZPvrtzUp7MmaZ2O+QFM=" },
+            //            3: { clue: "What is your name3", answer: "L347CupDNcmjBlwsbmtrXbz8EmQ=" },
+            //            4: { clue: "What is your name4", answer: "BVWomzU1UMGs9+4AFZlBpapQPFw=" },
+            //            5: { clue: "What is your name5", answer: "lg5FDfbXAq9apuxuNHthfThUPnE=" },
+            //            6: { clue: "What is your name6", answer: "MxBdWxSAFEqhbZ924e592CWkgpA=" },
+            //        },
+            //        Category4: {
+            //            1: { clue: "What is your name1", answer: "NqGSqFQbYknzBQka3T0bLJ1Q1Xs=" },
+            //            2: { clue: "What is your name2", answer: "58N/Lkt+ZPvrtzUp7MmaZ2O+QFM=" },
+            //            3: { clue: "What is your name3", answer: "L347CupDNcmjBlwsbmtrXbz8EmQ=" },
+            //            4: { clue: "What is your name4", answer: "BVWomzU1UMGs9+4AFZlBpapQPFw=" },
+            //            5: { clue: "What is your name5", answer: "lg5FDfbXAq9apuxuNHthfThUPnE=" },
+            //            6: { clue: "What is your name6", answer: "MxBdWxSAFEqhbZ924e592CWkgpA=" },
+            //        },
             //    },
+            //    selectedCategory: null,
             //    selectedOption: null,
             //    clueOptionsAnswered: {},
             //    successMessage: "Congratulations! Your answer is correct. Please select your next clue.",
@@ -132,17 +205,29 @@
             //    submitMessage: null
             //};
 
+            $scope.parseJSON = function (jsonString) {
+                return jsonString;
+            }
+
             $scope.init = function () {
+                StartCountDown();
+
                 var passCode = Util.getFromLocalStorage("STORE-passCode");
                 if (passCode != null) {
                     $scope.decryptGame(passCode);
+
+                    $scope.pagetext.selectedCategory = Util.getFromLocalStorage("STORE-selectedCategoryClueNo");
                     $scope.pagetext.selectedOption = Util.getFromLocalStorage("STORE-selectedOptionClueNo");
                     $scope.pagetext.clueOptionsAnswered = Util.getFromLocalStorage("STORE-clueOptionsAnswered");
+
+
                 }
                 else if ($scope.pagetext) {
-                    //$scope.pagetext.selectedOption = $scope.pagetext.clueOptions[Util.getFromLocalStorage("STORE-selectedOptionClueNo")];
+                    $scope.pagetext.selectedCategory = Util.getFromLocalStorage("STORE-selectedCategoryClueNo");
                     $scope.pagetext.selectedOption = Util.getFromLocalStorage("STORE-selectedOptionClueNo");
                     $scope.pagetext.clueOptionsAnswered = Util.getFromLocalStorage("STORE-clueOptionsAnswered");
+
+
                 }
 
                 if ($scope.pagetext && !$scope.pagetext.clueOptionsAnswered) {
@@ -150,7 +235,7 @@
                 }
             }
 
-            $scope.addToHomeScreen = function() {
+            $scope.addToHomeScreen = function () {
                 var bubble = new google.bookmarkbubble.Bubble();
                 var parameter = null;
 
@@ -186,24 +271,43 @@
                 alert(bubble.showIfAllowed());
             }
 
-            $scope.resetForNextClue = function () {
+            //$scope.resetForNextClue = function (category, option) {
+            //    $scope.pagetext.currentAnswer = null;
+            //    $scope.pagetext.nextClue = false;
+            //    //Util.setToLocalStorage("STORE-selectedOptionClueNo", $scope.pagetext.selectedOption);
+            //    Util.setToLocalStorage("STORE-selectedCategoryClueNo", category);
+            //    Util.setToLocalStorage("STORE-selectedOptionClueNo", option);
+            //}
+
+            $scope.OnQuesSelected = function (category, option) {
+                $scope.currentpage = 3;
                 $scope.pagetext.currentAnswer = null;
                 $scope.pagetext.nextClue = false;
-                Util.setToLocalStorage("STORE-selectedOptionClueNo", $scope.pagetext.selectedOption);
+                //Util.setToLocalStorage("STORE-selectedOptionClueNo", $scope.pagetext.selectedOption);
+                Util.setToLocalStorage("STORE-selectedCategoryClueNo", category);
+                Util.setToLocalStorage("STORE-selectedOptionClueNo", option);
+                $("#answer_clue_wrap").fadeIn(2000);
             }
 
             $scope.validateAnswer = function (answer) {
-                var selectedClue = $scope.pagetext.clueOptions[$scope.pagetext.selectedOption];
+                var selectedClue = $scope.pagetext.clueOptions[$scope.pagetext.selectedCategory][$scope.pagetext.selectedOption];
 
                 var deAnswer = Tea.decrypt(selectedClue.answer, answer);
 
                 if (selectedClue.clue == deAnswer) {
-                    $scope.pagetext.clueOptionsAnswered[$scope.pagetext.selectedOption] = { answer: answer, selectedOption: $scope.pagetext.selectedOption };
+
+                    if (!$scope.pagetext.clueOptionsAnswered[$scope.pagetext.selectedCategory]) {
+                        $scope.pagetext.clueOptionsAnswered[$scope.pagetext.selectedCategory] = {};
+                    }
+
+                    $scope.pagetext.clueOptionsAnswered[$scope.pagetext.selectedCategory][$scope.pagetext.selectedOption] = { answer: answer, selectedOption: $scope.pagetext.selectedOption };
+
                     $scope.pagetext.selectedOption = null;
                     $scope.pagetext.submitMessage = $scope.pagetext.successMessage;
 
                     Util.setToLocalStorage("STORE-clueOptionsAnswered", $scope.pagetext.clueOptionsAnswered);
                     Util.setToLocalStorage("STORE-selectedOptionClueNo", $scope.pagetext.selectedOption);
+                    $scope.showBackButton = true;
                 }
                 else {
                     $scope.pagetext.submitMessage = $scope.pagetext.errorMessage;
@@ -222,7 +326,11 @@
                 }
 
                 $scope.pagetext = gameJSON;
+
                 Util.setToLocalStorage("STORE-passCode", passCode);
+
+                $("#welcome_wrap").slideUp(3000);
+                $("#clue_content_detail").fadeIn(3000);
             }
         }
 
@@ -238,17 +346,18 @@
         }
 
         var password = $('#password'),
-        text = $('#text'),
-        enc = $('#encrypt')
-        , encrypt = function () {
-            enc.val(Tea.encrypt(text.val(), password.val()))
-        }, decrypt = function () {
-            text.val(Tea.decrypt(enc.val(), password.val()))
-        };
+            text = $('#text'),
+            enc = $('#encrypt')
+            , encrypt = function () {
+                enc.val(Tea.encrypt(text.val(), password.val()))
+            }, decrypt = function () {
+                text.val(Tea.decrypt(enc.val(), password.val()))
+            };
         $('#text-label').click(decrypt)
         $('#encrypt-label').click(encrypt)
         text.on('blur', encrypt)
         enc.on('blur', decrypt);
     </script>
+
 </body>
 </html>
