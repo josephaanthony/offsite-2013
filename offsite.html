@@ -17,14 +17,14 @@
         Hello
     </div>-->
 
-    <!-- HEADER -->
-    <input type="button" ng-click="addToHomeScreen()" value="Add to Home" />
-    <input type="button" onclick="localStorage.clear()" value="Clear" />
+    <!-- HEADER -->    
+    <!--<input type="button" onclick="localStorage.clear()" value="Clear" />-->
 
     <div id="header_content_wrap" class="header_wrap">
-        <div>
-            <div class="banner_msg btn" ng-show="showBackButton==true||currentpage==2" ng-click="currentpage=1;showBackButton=false">BACK</div>
+        <div>            
             <div class="banner">Offsite 2013</div>
+            <img src="stylesheets/back_button.png" class="banner_msg btn" ng-show="showBackButton==true||currentpage==2" 
+                ng-click="currentpage=1;showBackButton=false"></img>
         </div>
     </div>
 
@@ -47,7 +47,6 @@
 
                 <div style="width: 100%; display: none; text-align: center" id="clue_content_detail">
                     <div id="maincontent">
-
                         <div id="categoryOpt" ng-show="currentpage==1">
 
                             <!-- <select ng-model="pagetext.selectedCategory" 
@@ -78,32 +77,33 @@
                                 {{pagetext.clueOptions[pagetext.selectedCategory][pagetext.selectedOption].clue}}
                             </div>
                             <div id="ansTyped">
-                                <form>
-                                    Answer is:
+                                <form>                                    
                                 <input type="text" ng-model="pagetext.currentAnswer" />
-                                    <input type="submit" value="Validate Answer" ng-click="validateAnswer(pagetext.currentAnswer)" />
+                                    <input type="submit" value="Validate" 
+                                        ng-click="validateAnswer(pagetext.currentAnswer)" />
                                 </form>
                             </div>
                         </div>
 
-                        <div ng-show="pagetext.nextClue">
-                            {{pagetext.submitMessage}}
-                            
+                        <div ng-show="pagetext.nextClue && currentpage==3" id="successmsg" >
+                            {{pagetext.submitMessage}}                            
                         </div>
                     </div>
 
                     <br />
+                    
+                    <div id="answersheader" ng-show="currentpage==1 || currentpage==0"
+                        ng-click="showresults();" class="btn answerdiv" >
+                        My Achievements:
+                    </div>                    
 
-                    <div id="answers">
-                        <div ng-show="pagetext.clueOptionsAnswered">
-                            My Achievements -
-                            <div ng-repeat="(category, options) in pagetext.clueOptionsAnswered"
-                                style="color: red">
-                                Category {{category}}: {{options}}
-                            	<div ng-repeat="opt in parseJSON(options)" style="color: blue">
-                                    {{k}} - {{opt.answer}}
+                    <div id="answers" ng-show="currentpage==0" class="answerdiv" >                                               
+                        <div ng-show="pagetext.clueOptionsAnswered">                            
+                            <div ng-repeat="(category, options) in pagetext.clueOptionsAnswered" class="ansCategory" >
+                                {{category}}:
+                            	<div ng-repeat="opt in parseJSON(options)" class="ansdetail" >
+                                    {{opt.selectedOption}} - {{opt.answer}}
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -114,6 +114,8 @@
 
 
     <script>
+       
+
         function StartCountDown() {
             //var target_date = new Date("Dec 09 2013 15:00:00 GMT+0530").getTime();
 
@@ -133,9 +135,9 @@
                 minutes = parseInt(seconds_left / 60);
                 seconds = parseInt(seconds_left % 60);
 
-                if (seconds < 0) {
-                    $('#prestart_content').fadeOut(3000);
-                    $('#poststart_content').fadeIn(3000);
+                if (seconds <= 0) {
+                    $('#prestart_content').fadeOut(150);
+                    $('#poststart_content').fadeIn(1000);
 
                     clearInterval(refreshIntervalId);
                 }
@@ -159,6 +161,17 @@
                 $("#gameOpt").fadeIn(2000);
             }
 
+            $scope.showresults = function (){
+                //$('#answers').slideToggle("slow");                
+                if ($scope.currentpage === 0) {
+                    $scope.currentpage = 1;
+                    $('#categoryOpt').fadeIn();                    
+                } else {
+                    $scope.currentpage = 0;                    
+                    $('#answers').fadeIn(1000);                    
+                }
+            }
+            //$('#answers').slideToggle("fast");
             //$scope.pagetext = {
             //    clueText: 'Select Your Next Clue',
             //    clueOptions: {
@@ -302,7 +315,7 @@
 
                     $scope.pagetext.clueOptionsAnswered[$scope.pagetext.selectedCategory][$scope.pagetext.selectedOption] = { answer: answer, selectedOption: $scope.pagetext.selectedOption };
 
-                    $scope.pagetext.selectedOption = null;
+                    //$scope.pagetext.selectedOption = null;
                     $scope.pagetext.submitMessage = $scope.pagetext.successMessage;
 
                     Util.setToLocalStorage("STORE-clueOptionsAnswered", $scope.pagetext.clueOptionsAnswered);
