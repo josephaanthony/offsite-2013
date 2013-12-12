@@ -3,58 +3,99 @@ html {
 }
 
 body {
-    background-image: url('bg_new.jpg');
+    background-image: url('bg.jpg');
     background-repeat: no-repeat;
     -webkit-background-size: 190% 160%;
     background-size: 100% 100%;
     color: white;
-    font-family: "ALGERIAN";
+    font-family: cursive;
     margin: 0px;
     height: 100%;
     padding: 0;
+    text-shadow: 2px 2px #3B0B0B;   
 }
 
-img {
-    min-height: 0px;
-    min-width: 0px;
+input
+{
+    font-family:cursive;
 }
 
 .btn {
     cursor: pointer;
 }
 
-#categoryOpt {
-    color: blue;
-}
-
-#categoryOptNew {
-    color: blue;
-}
-
 #gameOpt {
     color: black;
 }
 
-
 #ansTyped {
-    color: green;
+    color: #81F7F3;
 }
 
 #maincontent {
-    font-family: "ALGERIAN";
-    
+    font-family: cursive;
+    text-shadow: 2px 2px #3B0B0B;    
+}
+
+#successmsg {
+    font-family: cursive;
+    color:#86B404;
+    background: rgba(59,11, 11, 0.60);
+    width:90%;
+    margin-left:5%;
+    border-radius:10px;
 }
 
 .header_wrap {
     height: 15%;
 }
 
+#prestart_content {
+    color: #D7DF01;
+    background: rgba(59,11, 11, 0.60);
+    font-family: cursive;
+}
+
+#answer_clue_wrap {    
+     background: rgba(59,11, 11, 0.60);
+     width:90%;
+     margin:5%;
+     border-radius:10px;
+     color:#D7DF01;
+}
+
+.answerdiv {
+    background: rgba(59,11, 11, 0.60);
+     width:90%;
+     margin-left:5%;
+     border-radius:10px;
+     border:1px solid black;
+}
+
+#answers {     
+     color:#86B404;     
+}
+
+
+#answersheader {
+    color:white;        
+}
+
+.ansCategory {    
+    border:1px solid black;
+    color:#D7DF01;
+}
+.ansdetail {
+    color:#86B404;
+}
+
 .banner {
     font-size: 40px;
     padding: 5px;
     text-align: center;
-    color: white;
-    font-family: "ALGERIAN";
+    color: #B43104;
+    font-family: cursive;
+    text-shadow: 2px 2px #3B0B0B;
 }
 
 .banner_msg {
@@ -62,14 +103,17 @@ img {
     padding: 5px;
     text-align: left;
     color: white;
-    font-family: "ALGERIAN";
+    font-family: cursive;
+    background-image: url('back_button.png');
+    background-size:cover;
+    background-position:center;
+    width:10%;
+    height:20%;
 }
 
 .main_content {
-    color: #7cf;
     font-size: 20px;
-    text-align: center;
-  
+    text-align: center;  
 }
 
 .categoryDiv {
@@ -103,9 +147,7 @@ img {
     box-align: center;
 }
 
-.countdown {
+#countdown_wrap {    
     font-size: 40px;
-    color: #4cff00;
-    /*color:red;*/
+    color: white; 
 }
-
