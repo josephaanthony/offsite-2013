@@ -65,16 +65,15 @@
                             ng-options="k as k for (k,v) in pagetext.selectedCategory" 
                             ng-change="resetForNextClue(pagetext.selectedCategory, pagetext.selectedOption)"></select>-->
 
-                            <div ng-repeat="(k,v) in pagetext.selectedCategory" class="categoryDiv btn"
-                                ng-click="pagetext.selectedOption=k; OnQuesSelected(pagetext.selectedCategory, k)">
+                            <div ng-repeat="(k,v) in pagetext.clueOptions[pagetext.selectedCategory]" class="categoryDiv btn"
+                                ng-click="OnQuesSelected(pagetext.selectedCategory, k)">
                                 {{k}}
                             </div>
 
                         </div>
 
                         <div id="answer_clue_wrap" ng-show="currentpage==3">
-                            <div>
-                                {{pagetext.clueOptions[pagetext.selectedCategory][pagetext.selectedOption].clue}}
+                            <div ng-bind-html-unsafe="pagetext.clueOptions[pagetext.selectedCategory][pagetext.selectedOption].clue">
                             </div>
                             <div id="ansTyped">
                                 <form>                                    
@@ -151,7 +150,7 @@
             $scope.passCode = null;
             //category -1 ,ques-opt -2 , original ques -3
             $scope.currentpage = 1;
-            $scope.data = "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";
+            //$scope.data = "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";
             $scope.showBackButton = false;
             $scope.pagetext = null;
 
@@ -172,51 +171,51 @@
                 }
             }
             //$('#answers').slideToggle("fast");
-            //$scope.pagetext = {
-            //    clueText: 'Select Your Next Clue',
-            //    clueOptions: {
-            //        Category1: {
-            //            1: { clue: "What is your name1", answer: "NqGSqFQbYknzBQka3T0bLJ1Q1Xs=" },
-            //            2: { clue: "What is your name2", answer: "58N/Lkt+ZPvrtzUp7MmaZ2O+QFM=" },
-            //            3: { clue: "What is your name3", answer: "L347CupDNcmjBlwsbmtrXbz8EmQ=" },
-            //            4: { clue: "What is your name4", answer: "BVWomzU1UMGs9+4AFZlBpapQPFw=" },
-            //            5: { clue: "What is your name5", answer: "lg5FDfbXAq9apuxuNHthfThUPnE=" },
-            //            6: { clue: "What is your name6", answer: "MxBdWxSAFEqhbZ924e592CWkgpA=" },
-            //        },
-            //        Category2: {
-            //            1: { clue: "What is your name1", answer: "NqGSqFQbYknzBQka3T0bLJ1Q1Xs=" },
-            //            2: { clue: "What is your name2", answer: "58N/Lkt+ZPvrtzUp7MmaZ2O+QFM=" },
-            //            3: { clue: "What is your name3", answer: "L347CupDNcmjBlwsbmtrXbz8EmQ=" },
-            //            4: { clue: "What is your name4", answer: "BVWomzU1UMGs9+4AFZlBpapQPFw=" },
-            //            5: { clue: "What is your name5", answer: "lg5FDfbXAq9apuxuNHthfThUPnE=" },
-            //            6: { clue: "What is your name6", answer: "MxBdWxSAFEqhbZ924e592CWkgpA=" },
-            //        },
-            //        Category3: {
-            //            1: { clue: "What is your name1", answer: "NqGSqFQbYknzBQka3T0bLJ1Q1Xs=" },
-            //            2: { clue: "What is your name2", answer: "58N/Lkt+ZPvrtzUp7MmaZ2O+QFM=" },
-            //            3: { clue: "What is your name3", answer: "L347CupDNcmjBlwsbmtrXbz8EmQ=" },
-            //            4: { clue: "What is your name4", answer: "BVWomzU1UMGs9+4AFZlBpapQPFw=" },
-            //            5: { clue: "What is your name5", answer: "lg5FDfbXAq9apuxuNHthfThUPnE=" },
-            //            6: { clue: "What is your name6", answer: "MxBdWxSAFEqhbZ924e592CWkgpA=" },
-            //        },
-            //        Category4: {
-            //            1: { clue: "What is your name1", answer: "NqGSqFQbYknzBQka3T0bLJ1Q1Xs=" },
-            //            2: { clue: "What is your name2", answer: "58N/Lkt+ZPvrtzUp7MmaZ2O+QFM=" },
-            //            3: { clue: "What is your name3", answer: "L347CupDNcmjBlwsbmtrXbz8EmQ=" },
-            //            4: { clue: "What is your name4", answer: "BVWomzU1UMGs9+4AFZlBpapQPFw=" },
-            //            5: { clue: "What is your name5", answer: "lg5FDfbXAq9apuxuNHthfThUPnE=" },
-            //            6: { clue: "What is your name6", answer: "MxBdWxSAFEqhbZ924e592CWkgpA=" },
-            //        },
-            //    },
-            //    selectedCategory: null,
-            //    selectedOption: null,
-            //    clueOptionsAnswered: {},
-            //    successMessage: "Congratulations! Your answer is correct. Please select your next clue.",
-            //    errorMessage: "Sorry! Your answer is incorrect. Please try again.",
-            //    nextClue: false,
-            //    currentAnswer: null,
-            //    submitMessage: null
-            //};
+            $scope.pagetext = {
+                clueText: 'Select Your Next Clue',
+                clueOptions: {
+                    Category1: {
+                        1: { clue: "What is your name1", answer: "NqGSqFQbYknzBQka3T0bLJ1Q1Xs=" },
+                        2: { clue: "What is your name2", answer: "58N/Lkt+ZPvrtzUp7MmaZ2O+QFM=" },
+                        3: { clue: "What is your name3", answer: "L347CupDNcmjBlwsbmtrXbz8EmQ=" },
+                        4: { clue: "What is your name4", answer: "BVWomzU1UMGs9+4AFZlBpapQPFw=" },
+                        5: { clue: "What is your name5", answer: "lg5FDfbXAq9apuxuNHthfThUPnE=" },
+                        6: { clue: "What is your name6", answer: "MxBdWxSAFEqhbZ924e592CWkgpA=" },
+                    },
+                    Category2: {
+                        1: { clue: "What is your name1", answer: "NqGSqFQbYknzBQka3T0bLJ1Q1Xs=" },
+                        2: { clue: "What is your name2", answer: "58N/Lkt+ZPvrtzUp7MmaZ2O+QFM=" },
+                        3: { clue: "What is your name3", answer: "L347CupDNcmjBlwsbmtrXbz8EmQ=" },
+                        4: { clue: "What is your name4", answer: "BVWomzU1UMGs9+4AFZlBpapQPFw=" },
+                        5: { clue: "What is your name5", answer: "lg5FDfbXAq9apuxuNHthfThUPnE=" },
+                        6: { clue: "What is your name6", answer: "MxBdWxSAFEqhbZ924e592CWkgpA=" },
+                    },
+                    Category3: {
+                        1: { clue: "What is your name1", answer: "NqGSqFQbYknzBQka3T0bLJ1Q1Xs=" },
+                        2: { clue: "What is your name2", answer: "58N/Lkt+ZPvrtzUp7MmaZ2O+QFM=" },
+                        3: { clue: "What is your name3", answer: "L347CupDNcmjBlwsbmtrXbz8EmQ=" },
+                        4: { clue: "What is your name4", answer: "BVWomzU1UMGs9+4AFZlBpapQPFw=" },
+                        5: { clue: "What is your name5", answer: "lg5FDfbXAq9apuxuNHthfThUPnE=" },
+                        6: { clue: "What is your name6", answer: "MxBdWxSAFEqhbZ924e592CWkgpA=" },
+                    },
+                    Category4: {
+                        1: { clue: "What is your name1", answer: "NqGSqFQbYknzBQka3T0bLJ1Q1Xs=" },
+                        2: { clue: "What is your name2", answer: "58N/Lkt+ZPvrtzUp7MmaZ2O+QFM=" },
+                        3: { clue: "What is your name3", answer: "L347CupDNcmjBlwsbmtrXbz8EmQ=" },
+                        4: { clue: "What is your name4", answer: "BVWomzU1UMGs9+4AFZlBpapQPFw=" },
+                        5: { clue: "What is your name5", answer: "lg5FDfbXAq9apuxuNHthfThUPnE=" },
+                        6: { clue: "Whats the name. <br/> Hint: <img src='stylesheets/c4-q6.jpg' />", answer: "MxBdWxSAFEqhbZ924e592CWkgpA=" },
+                    },
+                },
+                selectedCategory: null,
+                selectedOption: null,
+                clueOptionsAnswered: {},
+                successMessage: "Congratulations! Your answer is correct. Please select your next clue.",
+                errorMessage: "Sorry! Your answer is incorrect. Please try again.",
+                nextClue: false,
+                currentAnswer: null,
+                submitMessage: null
+            };
 
             $scope.parseJSON = function (jsonString) {
                 return jsonString;
@@ -228,19 +227,22 @@
                 var passCode = Util.getFromLocalStorage("STORE-passCode");
                 if (passCode != null) {
                     $scope.decryptGame(passCode);
-
-                    $scope.pagetext.selectedCategory = Util.getFromLocalStorage("STORE-selectedCategoryClueNo");
-                    $scope.pagetext.selectedOption = Util.getFromLocalStorage("STORE-selectedOptionClueNo");
-                    $scope.pagetext.clueOptionsAnswered = Util.getFromLocalStorage("STORE-clueOptionsAnswered");
-
-
                 }
-                else if ($scope.pagetext) {
+                
+                if ($scope.pagetext) {
                     $scope.pagetext.selectedCategory = Util.getFromLocalStorage("STORE-selectedCategoryClueNo");
                     $scope.pagetext.selectedOption = Util.getFromLocalStorage("STORE-selectedOptionClueNo");
                     $scope.pagetext.clueOptionsAnswered = Util.getFromLocalStorage("STORE-clueOptionsAnswered");
 
+                    if ($scope.pagetext.selectedCategory) {
+                        $scope.CategoryClick($scope.pagetext.selectedCategory);
+                    }
 
+                    if ($scope.pagetext.selectedOption) {
+                        $scope.OnQuesSelected($scope.pagetext.selectedCategory, $scope.pagetext.selectedOption);
+                    }
+
+                    
                 }
 
                 if ($scope.pagetext && !$scope.pagetext.clueOptionsAnswered) {
@@ -297,6 +299,9 @@
                 $scope.pagetext.currentAnswer = null;
                 $scope.pagetext.nextClue = false;
                 //Util.setToLocalStorage("STORE-selectedOptionClueNo", $scope.pagetext.selectedOption);
+
+                $scope.pagetext.selectedOption = option;
+
                 Util.setToLocalStorage("STORE-selectedCategoryClueNo", category);
                 Util.setToLocalStorage("STORE-selectedOptionClueNo", option);
                 $("#answer_clue_wrap").fadeIn(2000);
@@ -319,6 +324,7 @@
                     $scope.pagetext.submitMessage = $scope.pagetext.successMessage;
 
                     Util.setToLocalStorage("STORE-clueOptionsAnswered", $scope.pagetext.clueOptionsAnswered);
+                    Util.setToLocalStorage("STORE-selectedCategoryClueNo", $scope.pagetext.selectedCategory);
                     Util.setToLocalStorage("STORE-selectedOptionClueNo", $scope.pagetext.selectedOption);
                     $scope.showBackButton = true;
                 }
@@ -330,15 +336,17 @@
 
             $scope.decryptGame = function (passCode) {
                 var gameJSON = null;
-                try {
-                    gameJSON = eval("(" + Tea.decrypt($scope.data, passCode) + ")");
-                }
-                catch (e) {
-                    alert("Invalid Hunt Code! Please try again.");
-                    return;
-                }
 
-                $scope.pagetext = gameJSON;
+                if ($scope.data) {
+                    try {
+                        gameJSON = eval("(" + Tea.decrypt($scope.data, passCode) + ")");
+                    }
+                    catch (e) {
+                        alert("Invalid Hunt Code! Please try again.");
+                        return;
+                    }
+                    $scope.pagetext = gameJSON;
+                }
 
                 Util.setToLocalStorage("STORE-passCode", passCode);
 
