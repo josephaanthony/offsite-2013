@@ -5,12 +5,10 @@ html {
 body {
     background-image: url('bg.jpg');
     background-repeat: no-repeat;
-    -webkit-background-size: 190% 160%;
-    background-size: 100% 100%;
+    background-size: cover;
     color: white;
     font-family: cursive;
     margin: 0px;
-    height: 100%;
     padding: 0;
     text-shadow: 2px 2px #3B0B0B;   
 }
