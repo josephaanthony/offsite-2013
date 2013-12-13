@@ -34,7 +34,7 @@
 
     <div id="header_content_wrap" class="header_wrap">
         <div>            
-            <div class="banner">Offsite 2013</div>
+            <div class="banner">Treasure Hunt</div>
             <span src="stylesheets/back_button1.png" class="banner_msg btn" 
                 ng-show="showBackButton==true || currentpage==2 || currentpage==0" 
                 ng-click="currentpage=1;showBackButton=false" id="Img1" alt="<<BACK" >&lt;&lt;Back</span>
@@ -46,7 +46,7 @@
 
     <div id="main_content_wrap" class="main_content ">
         <div id="content_container">
-            <div id="prestart_content" style="margin-top: 20px; width: 100%; position: absolute;">
+            <div id="prestart_content">
                 <div>Your hunt starts in </div>
                 <div id="countdown_wrap" class="countdown"></div>
             </div>
@@ -57,6 +57,7 @@
                         <div>
                             <input id="password1" ng-model="passCode" type="password" placeholder="Type passcode here." />
                         </div>
+                        <br />
                         <input type="submit" value="Let the fun begin..." 
                             ng-click="decryptGame(passCode)" id="loginBtn" class="btn"/>
                     </form>
@@ -95,7 +96,7 @@
                             <div id="ansTyped">
                                 <form>                                    
                                 <input type="text" ng-model="pagetext.currentAnswer" />
-                                    <input type="submit" value="Validate" 
+                                    <input type="submit" value="Validate" id="validateAns"
                                         ng-click="validateAnswer(pagetext.currentAnswer)" />
                                 </form>
                             </div>
@@ -129,7 +130,6 @@
         </div>
     </div>
 
-
     <script>
 
 
@@ -138,10 +138,10 @@
 
 
 
-            var target_date = new Date().getTime() + 200;
-            var days, hours, minutes, seconds;
+            var target_date = new Date().getTime() + 15000;
             var refreshIntervalId = setInterval(function () {
 
+                var days = 0, hours= 0, minutes= 0, seconds=0;
                 var current_date = new Date().getTime();
                 var seconds_left = (target_date - current_date) / 1000;
                 days = parseInt(seconds_left / 86400);
@@ -153,7 +153,7 @@
                 minutes = parseInt(seconds_left / 60);
                 seconds = parseInt(seconds_left % 60);
 
-                if (seconds <= 0) {
+                if (seconds <= 0 && hours <= 0 && minutes <= 0 && days <= 0) {
 
                     $('#prestart_content').fadeOut(150);
                     $('#poststart_content').fadeIn(1000);
@@ -162,8 +162,7 @@
 
                 }
 
-                $('#countdown_wrap').text(days + "d, " + hours + "h, " + minutes + "m, " + seconds + "s");
-
+                $('#countdown_wrap').text(days + "d: " + hours + "h: " + minutes + "m: " + seconds + "s");
 
             }, 1000);
 
@@ -403,8 +402,10 @@
                     $scope.pagetext.submitMessage = $scope.pagetext.successMessage;
 
                     Util.setToLocalStorage("STORE-clueOptionsAnswered", $scope.pagetext.clueOptionsAnswered);
-                    Util.setToLocalStorage("STORE-selectedCategoryClueNo", $scope.pagetext.selectedCategory);
-                    Util.setToLocalStorage("STORE-selectedOptionClueNo", $scope.pagetext.selectedOption);
+                    //Util.setToLocalStorage("STORE-selectedCategoryClueNo", $scope.pagetext.selectedCategory);
+                    //Util.setToLocalStorage("STORE-selectedOptionClueNo", $scope.pagetext.selectedOption);
+                    Util.setToLocalStorage("STORE-selectedCategoryClueNo", null);
+                    Util.setToLocalStorage("STORE-selectedOptionClueNo", null);
                     $scope.showBackButton = true;
 
                 }
