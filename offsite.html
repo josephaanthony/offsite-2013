@@ -1,46 +1,27 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml" manifest="site.appcache">
-
 <head>
-
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"/>
-
     <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
-
     <meta name="apple-mobile-web-app-capable" content="yes"/>
-
     <meta name="HandheldFriendly" content="true"/>
-
     <meta name="MobileOptimized" content="width"/>
-
     <meta http-equiv="X-Frame-Options" content="deny" />
-
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/offsite.css"/>
     <script src="javascripts/offsite.js" type="text/javascript"></script>
-    <script src="javascripts/main.js"  type="text/javascript"></script>
-    <!--<script src="javascripts/bookmark_bubble.js"></script>-->
-    <title>Offsite 2013</title>
+    <title>Treasure Hunt</title>
 </head>
 
 <body ng-app ng-controller="GameController" ng-init="init()">
-    <!--    <div class="main_content absolute-center">
-        Hello
-    </div>-->
-
     <!-- HEADER -->    
     <input type="button" onclick="localStorage.clear()" value="Clear" />
-
     <div id="header_content_wrap" class="header_wrap">
         <div>            
             <div class="banner">Treasure Hunt</div>
             <span src="stylesheets/back_button1.png" class="banner_msg btn" 
                 ng-show="showBackButton==true || currentpage==2 || currentpage==0" 
                 ng-click="currentpage=1;showBackButton=false" id="Img1" alt="<<BACK" >&lt;&lt;Back</span>
-<!--            <img src="stylesheets/back_button1.png" class="banner_msg btn" 
-                ng-show="showBackButton==true || currentpage==2 || currentpage==0" 
-                ng-click="currentpage=1;showBackButton=false" id="backbtn" alt="<<BACK" ></img>-->
         </div>
     </div>
 
@@ -66,10 +47,6 @@
                 <div style="width: 100%; display: none; text-align: center" id="clue_content_detail">
                     <div id="maincontent">
                         <div id="categoryOpt" ng-show="currentpage==1">
-
-                            <!-- <select ng-model="pagetext.selectedCategory" 
-                                ng-options="k as k for (k,v) in pagetext.clueOptions"></select>            -->
-
                             <div ng-repeat="(k,v) in pagetext.clueOptions"
                                 class="categoryDiv btn"
                                 ng-click="CategoryClick(k); ">
@@ -79,15 +56,10 @@
                         </div>
 
                         <div id="gameOpt" ng-show="currentpage==2">
-                            <!--<select ng-model="pagetext.selectedOption" 
-                            ng-options="k as k for (k,v) in pagetext.selectedCategory" 
-                            ng-change="resetForNextClue(pagetext.selectedCategory, pagetext.selectedOption)"></select>-->
-
-                            <div ng-repeat="(k,v) in pagetext.clueOptions[pagetext.selectedCategory]" class="categoryDiv btn"
+                           <div ng-repeat="(k,v) in pagetext.clueOptions[pagetext.selectedCategory]" class="categoryDiv btn"
                                 ng-click="OnQuesSelected(pagetext.selectedCategory, k)">
                                 {{k}}
                             </div>
-
                         </div>
 
                         <div id="answer_clue_wrap" ng-show="currentpage==3">
@@ -131,17 +103,12 @@
     </div>
 
     <script>
-
-
+        
         function StartCountDown() {
-            //var target_date = new Date("Dec 09 2013 15:00:00 GMT+0530").getTime();
-
-
-
             var target_date = new Date().getTime() + 15000;
             var refreshIntervalId = setInterval(function () {
 
-                var days = 0, hours= 0, minutes= 0, seconds=0;
+                var days = 0, hours = 0, minutes = 0, seconds = 0;
                 var current_date = new Date().getTime();
                 var seconds_left = (target_date - current_date) / 1000;
                 days = parseInt(seconds_left / 86400);
@@ -154,12 +121,9 @@
                 seconds = parseInt(seconds_left % 60);
 
                 if (seconds <= 0 && hours <= 0 && minutes <= 0 && days <= 0) {
-
                     $('#prestart_content').fadeOut(150);
                     $('#poststart_content').fadeIn(1000);
-
                     clearInterval(refreshIntervalId);
-
                 }
 
                 $('#countdown_wrap').text(days + "d: " + hours + "h: " + minutes + "m: " + seconds + "s");
@@ -169,7 +133,6 @@
         }
 
         function GameController($scope) {
-
             $scope.passCode = null;
             //category -1 ,ques-opt -2 , original ques -3
             $scope.currentpage = 1;
@@ -186,28 +149,23 @@
             }
 
             $scope.showresults = function () {
-                //$('#answers').slideToggle("slow");                
+                
                 if ($scope.currentpage === 0) {
-
                     $scope.currentpage = 1;
                     $('#categoryOpt').fadeIn();
 
                 } else {
-
                     $scope.currentpage = 0;
                     $('#answers').fadeIn(1000);
 
                 }
 
             }
-            //$('#answers').slideToggle("fast");
+            
             $scope.pagetext = {
-
                 clueText: 'Select Your Next Clue',
                 clueOptions: {
-
                     Category1: {
-
                         1: { clue: "What is your name1", answer: "NqGSqFQbYknzBQka3T0bLJ1Q1Xs=" },
                         2: { clue: "What is your name2", answer: "58N/Lkt+ZPvrtzUp7MmaZ2O+QFM=" },
                         3: { clue: "What is your name3", answer: "L347CupDNcmjBlwsbmtrXbz8EmQ=" },
@@ -260,104 +218,36 @@
             };
 
             $scope.parseJSON = function (jsonString) {
-
                 return jsonString;
-
             }
 
             $scope.init = function () {
-
                 StartCountDown();
-
                 var passCode = Util.getFromLocalStorage("STORE-passCode");
                 if (passCode != null) {
-
                     $scope.decryptGame(passCode);
-
                 }
 
                 if ($scope.pagetext) {
-
                     $scope.pagetext.selectedCategory = Util.getFromLocalStorage("STORE-selectedCategoryClueNo");
                     $scope.pagetext.selectedOption = Util.getFromLocalStorage("STORE-selectedOptionClueNo");
                     $scope.pagetext.clueOptionsAnswered = Util.getFromLocalStorage("STORE-clueOptionsAnswered");
 
                     if ($scope.pagetext.selectedCategory) {
-
                         $scope.CategoryClick($scope.pagetext.selectedCategory);
-
                     }
 
                     if ($scope.pagetext.selectedOption) {
-
                         $scope.OnQuesSelected($scope.pagetext.selectedCategory, $scope.pagetext.selectedOption);
-
                     }
-
-
-
                 }
 
                 if ($scope.pagetext && !$scope.pagetext.clueOptionsAnswered) {
-
                     $scope.pagetext.clueOptionsAnswered = {};
-
                 }
-
             }
 
-            $scope.addToHomeScreen = function () {
-
-                var bubble = new google.bookmarkbubble.Bubble();
-                var parameter = null;
-
-                bubble.hasHashParameter = function () {
-
-                    return location.hash == "" && location.href.indexOf(parameter) == location.href.length - 1;
-
-                };
-
-                bubble.setHashParameter = function () {
-
-                    if (!this.hasHashParameter()) {
-
-                        location.href = parameter;
-
-                    }
-
-                };
-
-                bubble.getViewportHeight = function () {
-
-                    window.console.log('Example of how to override getViewportHeight.');
-                    return window.innerHeight;
-
-                };
-
-                bubble.getViewportScrollY = function () {
-
-                    window.console.log('Example of how to override getViewportScrollY.');
-                    return window.pageYOffset;
-
-                };
-
-                bubble.registerScrollHandler = function (handler) {
-
-                    window.console.log('Example of how to override registerScrollHandler.');
-                    window.addEventListener('scroll', handler, false);
-
-                };
-
-                bubble.deregisterScrollHandler = function (handler) {
-
-                    window.console.log('Example of how to override deregisterScrollHandler.');
-                    window.removeEventListener('scroll', handler, false);
-
-                };
-                alert(bubble.showIfAllowed());
-
-            }
-
+            
             //$scope.resetForNextClue = function (category, option) {
             //    $scope.pagetext.currentAnswer = null;
             //    $scope.pagetext.nextClue = false;
