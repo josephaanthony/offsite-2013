@@ -104,10 +104,11 @@ input
     /*background-image: url('back_button1.png');
     background-size:cover;
     background-position:center;*/
+    margin-top:5px;
     margin-left:5px;
     border-radius:10px;
     background:rgba(59,11, 11, 0.60);
-    font-size:30px;
+    font-size:20px;
     color:white;
     padding:5px;
     /*width:20%;*/
