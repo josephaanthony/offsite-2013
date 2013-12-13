@@ -101,11 +101,16 @@ input
 }
 
 .banner_msg {    
-    background-image: url('back_button.png');
+    /*background-image: url('back_button1.png');
     background-size:cover;
-    background-position:center;
-    color:black;
-    width:20%;
+    background-position:center;*/
+    margin-left:5px;
+    border-radius:10px;
+    background:rgba(59,11, 11, 0.60);
+    font-size:30px;
+    color:white;
+    padding:5px;
+    /*width:20%;*/
     height:30%;
     font-weight:bold;
 }
