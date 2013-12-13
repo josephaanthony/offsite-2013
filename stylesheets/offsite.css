@@ -16,6 +16,7 @@ body {
 input
 {
     font-family:cursive;
+    height:30px;
 }
 
 .btn {
@@ -71,7 +72,9 @@ input
 }
 
 #answers {     
-     color:#86B404;     
+     color:#86B404;    
+     max-height:30%;
+     overflow:auto; 
 }
 
 
@@ -94,19 +97,17 @@ input
     color: #B43104;
     font-family: cursive;
     text-shadow: 2px 2px #3B0B0B;
+    font-weight:bold;
 }
 
-.banner_msg {
-    font-size: 20px;
-    padding: 5px;
-    text-align: left;
-    color: white;
-    font-family: cursive;
+.banner_msg {    
     background-image: url('back_button.png');
     background-size:cover;
     background-position:center;
-    width:10%;
-    height:20%;
+    color:black;
+    width:20%;
+    height:30%;
+    font-weight:bold;
 }
 
 .main_content {
@@ -114,8 +115,7 @@ input
     text-align: center;  
 }
 
-.categoryDiv {
-    background: red;
+.categoryDiv {        
     background-image: url('icon-new.png');
     margin-top: 5px;
     color: white;
@@ -124,6 +124,14 @@ input
     background-size: cover;
     width: 60%;
     margin-left: 20%;
+}
+
+#loginBtn {
+    background-image: url('icon-new.png');
+    color: white;
+    background-repeat: no-repeat;
+    border: 1px solid black;
+    background-size: cover;
 }
 
 .absolute-center {
