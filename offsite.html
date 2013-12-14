@@ -28,6 +28,26 @@
     <div id="main_content_wrap" class="main_content ">
         <div id="content_container">
             <div id="prestart_content">
+                <div style="font-size:10px">Welcome to Treasure Hunt 2013.
+                    <br /> <br />
+                    <div style="text-align:left">
+                    Rules of the Game - <br />
+                    * Select among the 6 categories. <br />
+                    * Select the clues given in each category. <br />
+                    * Each player gets to attempt one clue at a time <br />
+                    * Play with your team to solve the maximum number of clues. <br />
+
+                    <br />
+                    Milestones: <br />
+                    * First 10 clues solved by the team. <br />
+                    * All clues of any one category solved by the team. <br />
+                    * Solve all clues and get to the treasure. <br />
+
+                    <br />
+                    Clue: <br />
+                    * The more the number of devices in a team, more are the chances to win.                    
+                    </div>
+                </div>
                 <div>Your hunt starts in </div>
                 <div id="countdown_wrap" class="countdown"></div>
             </div>
@@ -48,7 +68,7 @@
                     <div id="maincontent">
                         <div id="categoryOpt" ng-show="currentpage==1">
                             <div ng-repeat="(k,v) in pagetext.clueOptions"
-                                class="categoryDiv btn"
+                                class="categoryDiv btn {{getSelectedClassName(k)}}"
                                 ng-click="CategoryClick(k); ">
                                 {{k}}
                             </div>
@@ -56,13 +76,16 @@
                         </div>
 
                         <div id="gameOpt" ng-show="currentpage==2">
-                           <div ng-repeat="(k,v) in pagetext.clueOptions[pagetext.selectedCategory]" class="categoryDiv btn"
+                            {{pagetext.selectedCategory}}
+                           <div ng-repeat="(k,v) in pagetext.clueOptions[pagetext.selectedCategory]" class="categoryDiv btn {{getSelectedClassName(pagetext.selectedCategory,k)}}"
                                 ng-click="OnQuesSelected(pagetext.selectedCategory, k)">
                                 {{k}}
                             </div>
                         </div>
 
                         <div id="answer_clue_wrap" ng-show="currentpage==3">
+                            {{pagetext.selectedCategory}} <br />
+                            {{pagetext.selectedOption}}
                             <div ng-bind-html-unsafe="pagetext.clueOptions[pagetext.selectedCategory][pagetext.selectedOption].clue">
                             </div>
                             <div id="ansTyped">
@@ -105,7 +128,7 @@
     <script>
         
         function StartCountDown() {
-            var target_date = new Date().getTime() + 15000;
+            var target_date = new Date().getTime() + 1500;
             var refreshIntervalId = setInterval(function () {
 
                 var days = 0, hours = 0, minutes = 0, seconds = 0;
@@ -139,6 +162,24 @@
             //$scope.data = "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";
             $scope.showBackButton = false;
             $scope.pagetext = null;
+
+            $scope.getSelectedClassName = function (category, option) {
+                if (category && option && $scope.pagetext.clueOptionsAnswered[category][option]) {
+                    return "clueselected";
+                }
+                else if(category && $scope.pagetext.clueOptionsAnswered[category])
+                {
+                    if (Object.keys($scope.pagetext.clueOptionsAnswered[category]).length == Object.keys($scope.pagetext.clueOptions[category]).length) {
+                        return "clueselected";
+                    }
+                    else {
+                        return "clueattempted";
+                    }
+                }
+                
+                return "";
+
+            }
 
             $scope.CategoryClick = function (k) {
 

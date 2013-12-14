@@ -141,6 +141,14 @@ input {
     margin-left: 20%;
 }
 
+.clueselected {
+    color:green!important;
+}
+
+.clueattempted {
+    color:yellow!important;
+}
+
 #loginBtn {
     background-image: url('icon-new.png');
     color: white;
