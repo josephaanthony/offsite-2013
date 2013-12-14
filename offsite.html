@@ -15,7 +15,7 @@
 
 <body ng-app ng-controller="GameController" ng-init="init()">
     <!-- HEADER -->    
-    <input type="button" onclick="localStorage.clear()" value="Clear" />
+    <!--<input type="button" onclick="localStorage.clear()" value="Clear" />-->
     <div id="header_content_wrap" class="header_wrap">
         <div>            
             <div class="banner">Treasure Hunt</div>
@@ -88,7 +88,7 @@
                             {{pagetext.selectedCategory}} <br />
                             Clue No: {{pagetext.selectedOption}}
                             </span>
-                            <div id="answer_clue_wrap" >
+                            <div id="answer_clue_wrap" style="font-size:15px;" >
                                 <div ng-bind-html-unsafe="pagetext.clueOptions[pagetext.selectedCategory][pagetext.selectedOption].clue">
                                 </div>
                                 <div id="ansTyped">
