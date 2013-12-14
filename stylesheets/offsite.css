@@ -131,7 +131,7 @@ input {
 }
 
 .categoryDiv {
-    background-image: url('icon-new.png');
+    background-image: url('icon-new.jpg');
     margin-top: 5px;
     color: white;
     background-repeat: no-repeat;
@@ -150,8 +150,10 @@ input {
 }
 
 #loginBtn {
-    background-image: url('icon-new.png');
-    color: white;
+    background-image: url('icon-new.jpg');
+    color:white;
+    /*color: rgb(73, 19, 19);
+    font-weight:bold;*/
     background-repeat: no-repeat;
     border: 1px solid black;
     background-size: cover;
@@ -164,7 +166,7 @@ input {
 }
 
 #validateAns {
-    background-image: url('icon-new.png');
+    background-image: url('icon-new.jpg');
     margin-top: 5px;
     color: white;
     background-repeat: no-repeat;

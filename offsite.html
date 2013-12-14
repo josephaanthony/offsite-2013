@@ -129,6 +129,14 @@
         </div>
     </div>
 
+<!--    <div>
+        Passcode: <input type="text" value="" id="_passCode" style="width:400px" /> <br />
+        ClearText: <input type="text" value="" id="_clearText" style="width:400px" /> <br />
+        EnrypteTet: <input type="text" value="" id="_encText" style="width:400px" /> <br />
+        <input type="button" value="Encrypt" onclick="$('#_encText').val(Tea.encrypt($('#_clearText').val(), $('#_passCode').val()))" /> <br />
+    </div>-->
+
+
     <script>
         
         function StartCountDown() {
@@ -168,21 +176,20 @@
             $scope.pagetext = null;
 
             $scope.getSelectedClassName = function (category, option) {
-                if (category && option && $scope.pagetext.clueOptionsAnswered[category][option]) {
-                    return "clueselected";
-                }
-                else if(category && $scope.pagetext.clueOptionsAnswered[category])
-                {
-                    if (Object.keys($scope.pagetext.clueOptionsAnswered[category]).length == Object.keys($scope.pagetext.clueOptions[category]).length) {
+                if ($scope.pagetext.clueOptionsAnswered && $scope.pagetext.clueOptionsAnswered[category]) {
+                    if (category && option && $scope.pagetext.clueOptionsAnswered[category][option]) {
                         return "clueselected";
                     }
-                    else {
-                        return "clueattempted";
+                    else if (category && $scope.pagetext.clueOptionsAnswered[category]) {
+                        if (Object.keys($scope.pagetext.clueOptionsAnswered[category]).length == Object.keys($scope.pagetext.clueOptions[category]).length) {
+                            return "clueselected";
+                        }
+                        else {
+                            return "clueattempted";
+                        }
                     }
                 }
-                
                 return "";
-
             }
 
             $scope.CategoryClick = function (k) {
@@ -207,50 +214,45 @@
 
             }
             
-            $scope.pagetext = {
-                clueText: 'Select Your Next Clue',
-                clueOptions: {
-                    Category1: {
-                        1: { clue: "What is your name1", answer: "NqGSqFQbYknzBQka3T0bLJ1Q1Xs=" },
-                        2: { clue: "What is your name2", answer: "58N/Lkt+ZPvrtzUp7MmaZ2O+QFM=" },
-                        3: { clue: "What is your name3", answer: "L347CupDNcmjBlwsbmtrXbz8EmQ=" },
-                        4: { clue: "What is your name4", answer: "BVWomzU1UMGs9+4AFZlBpapQPFw=" },
-                        5: { clue: "What is your name5", answer: "lg5FDfbXAq9apuxuNHthfThUPnE=" },
-                        6: { clue: "What is your name6", answer: "MxBdWxSAFEqhbZ924e592CWkgpA=" },
-
-                    },
-                    Category2: {
-
-                        1: { clue: "What is your name1", answer: "NqGSqFQbYknzBQka3T0bLJ1Q1Xs=" },
-                        2: { clue: "What is your name2", answer: "58N/Lkt+ZPvrtzUp7MmaZ2O+QFM=" },
-                        3: { clue: "What is your name3", answer: "L347CupDNcmjBlwsbmtrXbz8EmQ=" },
-                        4: { clue: "What is your name4", answer: "BVWomzU1UMGs9+4AFZlBpapQPFw=" },
-                        5: { clue: "What is your name5", answer: "lg5FDfbXAq9apuxuNHthfThUPnE=" },
-                        6: { clue: "What is your name6", answer: "MxBdWxSAFEqhbZ924e592CWkgpA=" },
-
-                    },
-                    Category3: {
-
-                        1: { clue: "What is your name1", answer: "NqGSqFQbYknzBQka3T0bLJ1Q1Xs=" },
-                        2: { clue: "What is your name2", answer: "58N/Lkt+ZPvrtzUp7MmaZ2O+QFM=" },
-                        3: { clue: "What is your name3", answer: "L347CupDNcmjBlwsbmtrXbz8EmQ=" },
-                        4: { clue: "What is your name4", answer: "BVWomzU1UMGs9+4AFZlBpapQPFw=" },
-                        5: { clue: "What is your name5", answer: "lg5FDfbXAq9apuxuNHthfThUPnE=" },
-                        6: { clue: "What is your name6", answer: "MxBdWxSAFEqhbZ924e592CWkgpA=" },
-
-                    },
-                    Category4: {
-
-                        1: { clue: "What is your name1", answer: "NqGSqFQbYknzBQka3T0bLJ1Q1Xs=" },
-                        2: { clue: "What is your name2", answer: "58N/Lkt+ZPvrtzUp7MmaZ2O+QFM=" },
-                        3: { clue: "What is your name3", answer: "L347CupDNcmjBlwsbmtrXbz8EmQ=" },
-                        4: { clue: "What is your name4", answer: "BVWomzU1UMGs9+4AFZlBpapQPFw=" },
-                        5: { clue: "What is your name5", answer: "lg5FDfbXAq9apuxuNHthfThUPnE=" },
-                        6: { clue: "Whats the name. <br/> Hint: <img src='stylesheets/c4-q6.jpg' />", answer: "MxBdWxSAFEqhbZ924e592CWkgpA=" },
-
-                    },
-
-                },
+            $scope.pagetext = { 
+                clueOptions:
+{
+    "@Work -1": {
+        1: { clue: "Sabse filmy * 10 = whose extension?", answer: "Hl4Li3MrG30+HO9zq+lB9DgJwxVGKzNN/RXNf7whCSqhK9WB" },
+        2: { clue: "Synonyms of light are their names, name 5 people on our floor. (reach to Vishal with their names - Perfect)", answer: "Qw+yKZ1uGUNlV/x9KpON91idniJSNlR47Y7aj5NMbnHFWtBDyFiNViVBJOv72ht9k8aLyxC3cZiCVspwNqTaPLp/mMIhIfVu4s08DZ6uEoxvACwlcw0rFUsPDHL2Mt4ld8XT+qzOL/0rSJRA" },
+        3: { clue: "This MSWIM colleague â€“ one of the Refresh blog editors â€“ has his email idâ€™s (mind it, not the nameâ€™s) initials as a popular certification amongst managers.", answer: "HprCV0doZ3jWYU4COo63X6qchOK7bN/zQMxm0EM4jFzFQseoq/2L6bJLL8J91vDSfd8X6wJo5xQroMUg0w42XOc57QeMyvEU8TJpm6d6FpVDvPXyiIJvlvJF7V3a9FjUi+8lPp0hs2NUJ+uBDg1GUyvwmBLGBR3hWY2A3fIHGtIoF9bTNq83w6N1UYoKb6oekVb1HHcXMUb5LLKadr9QNMWNfrrEQTMsTzthoPdIjdS3LNGfi5ncUA==" },
+        4: { clue: "Name of the application used to manage Real Estate investment business pipeline?", answer: "hBPrsuBZOcogrubTL8xCMcIBDlPmbkaqCzRdtwcTYAcvM+rDeCFwwy5Oiq+VGc9kU3gRbrUONyJSaKaURu1Aay0ZHZ244jlMEaUbheunnIc=" },
+        5: { clue: "Which two applications have a Patent/Pending Patent? Enter each application seperated by comma without space in between.", answer: "fZescD2Uwe3ITLxg7Vit8L1+oYqL2Fmz9JLTg4KFYlGYkt1xCLURz/hXFxpc4ra9Gw1E389Wzq11TBSBot+haA0SXrXY9GDlZoNSLzHGcTUn+JXEcExcIpgevEJ8aQRWBqf08Nq8CYlQYtRArGXoYpX9JDx291IY" },
+    },
+    "@Work -2": {
+        1: { clue: "Recently launched firm initiative which has a 3 letter Go-to URL with a number in between â€“ ", answer: "xsmGC5gPrTDvKa5ErNpAiPW+yV5QaiK1DOf8t+rKBSFK+JzIB+gHolDkN1EbEGn90c4pF4hGD2XG7VMMzsHlzF8IoO3k3WQ1WVFFsCcD+cmdM8zRft1viG4iOAiX7G//1fi+1g==" },
+        2: { clue: "\"Execute in a way that is consistent with our values and, whenever possible, deliver more than â€œmyâ€ part of the Firm.\". What is this & Who said it? ", answer: "o2AzYDaSK/D7m78tOh+pY5IEsYx/uiuArib6l8T9BlA1FGR8yzY4G6TPS+x6OXBzRVE/5t/1d1o1qwmwECE/VxdVcJf+BMfxCjRpcBgFnTJ39RVP/EFMF6LLmJYIujSrL1VlKgS5CzX2X9oMg+9BT/S6TYtmNpVAiezTJOagxHjhCKca14GlBEtVB1U6PpH/uvqyWudSCG++Oz34yVPPvA==" },
+        3: { clue: "Launched recently to let you know more about yourself. It is all about you.", answer: "St2z+8lVshPjlM7bYcTSxcPyGB1ke1/JrLbs/gb3VVDSZMF+FfbzlHSiNR+2VyEcSmNhLYPPXf9LBUKcmIWmSKlofFMnsIqEdQ8uXA==" },
+        4: { clue: "Speciality of firm associated charity building in NY which recently saw June month for the 10th time?", answer: "QCB7gyUsHx+82NoHqq8CI7EUwm1KJOkyLcnY/ONU1zaB3cHMwwbNBXaoF7iiPwVAhTNI+sd7iqT38IN9bV8BqptEC5GLRM6G4nCBJhfCTxaAfOu3EqprUFwB4VEKLPnHxcti7QEkc+0=" },
+        5: { clue: "How many client correspondence transactions does PERT handle every month? Give the average number. Reach out to the new EPS WMT Lead to get the answer to be keyed in. ", answer: "ZQeqkSgC7YPWAAuoa8jvGSb2fomXsBN4tglebFSadGiTyKTQ7+x+gt8Xaje6GkZ5E4EHS8X6L9np4/HS+pJIM2miZZk6tZuFRqOjV+7hcAxmPC52eCg0Sd4LhWgBiRG56irvBnsJwROiMBX24X+78Wn52taRGl92eveVOj98G2LnR8eHEAx1cPfMmnVFvFUqInzeZro/i85M/iKIm9Aw7MG55HfSnSZ+" },
+    },
+    "Puzzles/Riddles": {
+        1: { clue: "I am a Halogen, Mostly yellow-green, I may not be so nobel, But I am all of seventeen.", answer: "XocLE3x/igl+J4EMQmpIeQyhpQhmjU7iXgXW4Q9nwVmNWNCiCTsIzYpU7JYtWTYvS/pJDkhPAV08Jkqkp+XcUhjUVoG7lX22urGEzlADPDdsyjo4jRzy5g==" },
+        2: { clue: "Brothers and sisters, I have none. But this man's father is my father's son. Who is this man?", answer: "kZuqv6GivLO6XHa4F6rJRoIfjqLGq90EIfrqbnxp+sP4XOK598EYHAlxoHwOBpcE3dGeP+ar2dWPwpWwJ2XNRoZjge+PkizACtkYg9hFcf4YSp/njOorg+dYKgTK9Tu8" },
+        3: { clue: "Identify this character and the series. Enter Character'sName-SeriesName <img src='stylesheets/c1-q3.jpg' />", answer: "FABrsIOhiIMGjerZ1uREv/x2/f22cxZXhAGZHeG584cdbL3CVamuHApiEor5EmYngtB1GM4xpkCiNw37GKMZfFKI9URIGgWY1gMNpD3wWyQEe0P0grcEVSgeapu6y4kM/PEO4YOWdLyYOCdN5OagqQ==" },
+        4: { clue: "If you have me, you want to share me. If you share me, you haven't got me. What am I?", answer: "oha4J9ZMWkXnMHOjn6XDv5qde/xvJvkzkWRrgk+SOvIpQRlShYENtTgJ6ubVa4N78hX12gqTGxqibsfT6E3dMeIJOFP8mUGUexR3yyteZd4Dztx8TpqniA==" },
+        5: { clue: "Two old men are sitting in front of two doors. One doors leads to freedom the other one leads to jail. The two men know the secret of the doors. One of the men is always lying the other one is always telling the truth. You can ask only one question to one man before deciding which door you will go through... What is your question ? Ans : A good question could be Is the liar in front of the door to freedom ?If you ask it to the liar and if he is in front of the door to freedom, he will say NO. If you ask it to the truthful man and if he is in front of the door to freedom, he will say NO. If you ask it to the liar and if he is in front of the door to jail, he will say YES. If you ask it to the truthful man and if he is in front of the door to jail, he will say YES.Therefore you take the door of the man saying NOWhen you get the answer, reach out to Vishal Shah to get the answer.", answer: "1u8E0q2YyrZW4GeMtXKzBKpkdjsux2TQGsFpRoX4wdo1zdUMIRi+/J+YJvYLqKrffGyKlb87ueFPWxUrXYzF6WbwxWaPB6sbNIUagUMeFMYddaaVp0ey/2fu8olqMjNCbq6NIqgySAbGDgDE2b/UWr5Pyf5OQnxHv5Y4huKIxiJ3kwM8Hfbfyxibq3nQshm8T+ZzeO189/ZaByvGpQlEJmgrTSkajF8uN9JRDjl4Lj83q/h6DxGk6NeCam8ByXRah9omSSarIfr6ORoB0dml/j0vcMj2ZD6YZ8zo78xHgYegDPZpKO95EbtIwqC7U1x6OR87gupDKP2cPl+pqy0Zgscs2rs8Q5G9qJSZCN1pvOWAL7FRIGOFZsz0MDhhsRpcLPkHiRSGZ1cgmAc6ZTA6kozeeihxXm9y7PIqUZMOT795Pnnveo0I5LvQIKkBJsKIfAy1Spsagu1lRYfaY1S629DGg9Agt9wWDc2msRWIBjBKK1dSulExbWFXppYGIFwwH13zco5u2N4SAA2xdPcgmzoAnY6oeoTN2CoZE8/38Gx8RPpX0dwe/jQxIfe3Z1sDg/lJaGhqawCSrjaCYaiuYywTPkY34zYGGQsNVQ4yi5x3+FMswQLEDQnIiE+dVuksixJFkdf/HRUolUoUpIfFIIsdNBikZsXOd6VCdoc8fUfdlFngojH46Lqc13yLR9+pX6Shiqr8vNSH+ZI+Npe3NIbbRjP9zGfQsosnmGoChsu/C9ufR9DvqFuhP+2Vfh+d5PEN5uK+07PKCgevTe4gAFPK4fGPh8owiMpAy46FuUAOsA+PS/g1MeWBf61PUZPmxvczPEqr+z6sE8f41s2e0GpCfqp/XOZQeHzfr93O2nyR3/mcDTFr5oxjr/gWfcYH75fBbEuREAcu4kTgr3orDfxObedfw0qlXwWoAVgm+A254w8pxOWDubcdaikHXtKS8gXCL3GLL7Ll1Vc0qyJOigNtlPCvm4mgKB4PN7WErmwPp3GMXi8wSRv0oPAL4S8b/k6UPVxXaAudgijru3PgVwE63Ocf9elyYLBlxGajXVur3gsyvi6jboeueWAStSDqa1Gv1kR8DP4xQ0OMBgZu2n2sGjuh9CqAggdpeGii9FMmBi6gR5T6e0vvXK0mwMbJUEAmGJX+ItHwR8lCmtuqard0sFEloKqSushnIA==" },
+    },
+    "Sports": {
+        1: { clue: "I have earned highest number of individual gold medals in olympic, the number is double the second highest. People call me half man half fish. Michael Phelps. Reach out to Suswar to get the answer to be keyed in", answer: "VcK0pgAnNk22FhVGflZmmFpceBjCQAUExo7ravynyAnMrDfbHvfOGJGVollAPj0K2tWrxnEpPWINvSqYoBWqV3mESdY2wDegPa+8LM2cUSR16UMp1aRqxyo16Fpf0W/+nQI+7J9NPo0SUFRBBU+khQqMUK8gNyrwT6LDPZeyoWNxWFetynEJFbY0285yyS3ykOoSTx+Z9k69pI8gNaXl2G8PXL1AY6z/U/rp9/ctMXhxlaCgf9mKbdZ281rRzwZ0Xeh2WVxnDRWy3Xg4w8GGr71PZQ4=" },
+        2: { clue: "We have been supplying balls for the Wimbledon from year 1902. <img src='stylesheets/c4-q2.jpg'/>", answer: "cB5IyJyyHMfwnDcVkkYWFcce2/9+VKvgCehXSxCa4SSjatxEgYW19m/x7/9M+drwKwPEyS8xSu8j783nuzzKV6yd2Fz1javG+kojCvMQaf58lX9znDmKJ5eti+lplbZwxTo0DA==" },
+        3: { clue: "Fastest Indian to complete 100 wickets in Tests History.", answer: "rH/5OyNKdB52tvHPx07DGBwoMXpezzGUXL5UCfm4uW9G8HG6nGpVOtB2zVdl0bqLsYIHx1PnODc=" },
+        4: { clue: "22-year-old young Norwegian who won major sporting event in 2013 by defeating Indiaâ€™s NIIT ambassador. Enter first name, last name", answer: "1CGbK0M4Yqp5zRz/1RUqT33QGQr9rAaI8M32ApQINkJvMxwWi8FldZxDdeCo6fFvkoWvQuTiadEv9j7wRz/8SMWL8Mr6TWwKcSW3VW/UJgzmJjlhBDe0kntoSxXvT+cRcP3/o+6go0S/3q5JsU/GegtTAPsLDbvxofXdZnHk1mkSXH5SQYKJ/wPEZ0c=" },
+        5: { clue: "He was born (in Argentina) of parents who belonged to middle class origin. He had growth hormone deficiency detected at the age of 11. Currently he is amongst the best in his sport. His team mates nicknamed him as \"The flea\". His first contract was signed on a napkin. Reach out to Varun Joshi to get the answer", answer: "IMV2WjltBgaQYV8YcVnkmZFO5+vwOROgQSueYm5AIAb39y3XhbY40rpk0ALPAWNYaKfIL6m8uYd1au3PsQuF+5c4Dkyv+z88TgYPhjUJGSKWEU9Q2eE0lVuzjlMK0H58prUsH9a9uETMgacYwAHGur02e8FqDzL8F2yrz+n0oMQGPNbIx+8iAyC2Kpz2GOJvhD0DW+AwtSbcQ4p3pe+m/8lhBpTrD1ND43jVqgLAVf8Ysk6S7ooCmK/ihqYdBK9QlCgAdT2MrLgo8BIymZryaq1+weUujEtIo6lkXjR0F+HmEDQDH8sQMI14xOBb9qazY/aFWGCr+baFK8dSresTZ/C+8V8148Wexcjwd8JIWcS05D5Ho/oDAJCQXJoYP4+T+fb4Ct1uRCEUFurm6ni24GS4MNlkYIru" },
+    },
+    "Technology": {
+        1: { clue: "Identify him . He is not very famous.But founder of a famous website Hint : Take a close look at this face. <img src='stylesheets/c5-q1.jpg' />", answer: "gbIjGeymrO+LUZw6kxRtK4UD4xevag24fCHO1fx5EoRyb8CE5w/SfKoHqW1+TC2L9p60Ipzzf0eo+7ptaLy1imeWzRVTcy2AoxGc/XQRJ4Of6VW2SMEpvQJ6dQWkoiKdidT2ZKgPs99SOl0uZZ0T5S8RvEG0OhtG7z7gNXTY8fXvYPbhkk8Ee7SrT/caCY3A" },
+        2: { clue: "There was once a man named Galileo who had great grandson named Juno. What are we talking about?", answer: "dELEu7jeKZnhEAqZ/E6lyf7o8LDGCsu5D7bGi9tFOJYbvuI8yc0KdqlbqIvDbBEIolBAz1KAyKGrfOn7RIkcsC5a5/8SGCNbiGjqTJGT0MD5ASRLSETURSnbL7zrH2mb" },
+        3: { clue: "I can fly up and down, backwards, left and right, and even upside down. I am also an algorithm which claims that search can be more human while interacting with user and provide direct answers. What am I?", answer: "0JUsuluqHafMDvfXhvPVuDHQUazEtkXptEmAXPazLBL32GAGyIsmrPp4pTXdoXN3ynfDQifYkb7bM4gFdqyHgKF5wePN+FWgpNxudwDwqg8Mxv2L1pHHsyhAAU9GbXbGT4IojW7LJBfjHHfDIF0N1z3zQHus7VT5tvKe7UhqoHKfyiC/XuxxJ1nQmnDtb7lT4W37i8Y2H7w+ULJGbWodphdGHBwT0pYEs2mETanCUUvGmrOtbgwX76RxirqpnjifUvPgmjsLXtheLOC+" },
+        4: { clue: "Changing logo on the most visited website in the world is called?", answer: "oul6sRND4HppVoB7nSManY1hhIbdo/DN5UBX9sx1tOzfckkRdWWMVlC4c6mZboh/t3a5niSQ4VKqI7sDiSb8tCvGYV0=" },
+        5: { clue: "Identify the below person? Enter FirstName LastName.", answer: "9yVRpnasQeWaI04p7blXdOto4d1Cgo4tt4HJNbfMqG6LyCxpclYlfyCa9c3SRF6lOtQWyw==" },
+    },
+},
                 selectedCategory: null,
                 selectedOption: null,
                 clueOptionsAnswered: {},
