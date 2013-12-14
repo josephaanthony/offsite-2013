@@ -22,7 +22,7 @@
                     <div ng-repeat="(k,v) in pagetext.clueOptions">
                     "{{k}}": {
                         <div ng-repeat="(k1,v1) in pagetext.clueOptions[k]">
-                            {{k1}}: { clue: "{{sanitize(v1.clue)}}", answer: "{{encryptedAnswer(v1.clue,v1.answer)}}" },
+                            {{k1}}: { clue: "{{sanitize(v1.clue)}}", answer: "{{encryptedAnswer(sanitize(v1.clue),v1.answer)}}" },
                         </div>                        
                         },
                     </div>
@@ -43,7 +43,7 @@
             };
 
             $scope.encryptedAnswer = function (clearText, passCode) {
-                return Tea.encrypt(clearText, passCode);
+                return Tea.encrypt(clearText, passCode.toLowerCase());
             };
 
             $scope.pagetext = {
@@ -67,14 +67,14 @@
 
                         1: { clue: "Sabse filmy * 10 = whose extension?", answer: "Mailroom 1048" },
                         2: { clue: "Synonyms of light are their names, name 5 people on our floor. (reach to Vishal with their names - Perfect)", answer: "Perfect" },
-                        3: { clue: "This MSWIM colleague – one of the Refresh blog editors – has his email id’s (mind it, not the name’s) initials as a popular certification amongst managers.", answer: "Punit.Maharajkrishan.Puri@ms.com" },
+                        3: { clue: "This MSWIM colleague â one of the Refresh blog editors â has his email idâs (mind it, not the nameâs) initials as a popular certification amongst managers.", answer: "Punit.Maharajkrishan.Puri@ms.com" },
                         4: { clue: "Name of the application used to manage Real Estate investment business pipeline?", answer: "PRISM" },
                         5: { clue: "Which two applications have a Patent/Pending Patent? Enter each application seperated by comma without space in between.", answer: "BEAM,DSP" },
                     },
                     "@Work -2": {
 
-                        1: { clue: "Recently launched firm initiative which has a 3 letter Go-to URL with a number in between – ", answer: "e2D" },
-                        2: { clue: "\"Execute in a way that is consistent with our values and, whenever possible, deliver more than “my” part of the Firm.\". What is this & Who said it? ", answer: "Never give up" },
+                        1: { clue: "Recently launched firm initiative which has a 3 letter Go-to URL with a number in between â ", answer: "e2D" },
+                        2: { clue: "\"Execute in a way that is consistent with our values and, whenever possible, deliver more than âmyâ part of the Firm.\". What is this & Who said it? ", answer: "Never give up" },
                         3: { clue: "Launched recently to let you know more about yourself. It is all about you.", answer: "me@MS" },
                         4: { clue: "Speciality of firm associated charity building in NY which recently saw June month for the 10th time?", answer: "We are about People" },
                         5: { clue: "How many client correspondence transactions does PERT handle every month? Give the average number. Reach out to the new EPS WMT Lead to get the answer to be keyed in. ", answer: "Million" },
@@ -84,7 +84,7 @@
                         1: { clue: "I have earned highest number of individual gold medals in olympic, the number is double the second highest. People call me half man half fish. Michael Phelps. Reach out to Suswar to get the answer to be keyed in", answer: "NqGSqFQbYknzBQka3T0bLJ1Q1Xs=" },
                         2: { clue: "We have been supplying balls for the Wimbledon from year 1902. <img src='stylesheets/c4-q2.jpg'/>", answer: "58N/Lkt+ZPvrtzUp7MmaZ2O+QFM=" },
                         3: { clue: "Fastest Indian to complete 100 wickets in Tests History.", answer: "L347CupDNcmjBlwsbmtrXbz8EmQ=" },
-                        4: { clue: "22-year-old young Norwegian who won major sporting event in 2013 by defeating India’s NIIT ambassador. Enter first name, last name", answer: "BVWomzU1UMGs9+4AFZlBpapQPFw=" },
+                        4: { clue: "22-year-old young Norwegian who won major sporting event in 2013 by defeating Indiaâs NIIT ambassador. Enter first name, last name", answer: "BVWomzU1UMGs9+4AFZlBpapQPFw=" },
                         5: { clue: "He was born (in Argentina) of parents who belonged to middle class origin. He had growth hormone deficiency detected at the age of 11. Currently he is amongst the best in his sport. His team mates nicknamed him as \"The flea\". His first contract was signed on a napkin. Reach out to Varun Joshi to get the answer", answer: "lg5FDfbXAq9apuxuNHthfThUPnE=" },
 
                     },
