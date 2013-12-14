@@ -83,17 +83,21 @@
                             </div>
                         </div>
 
-                        <div id="answer_clue_wrap" ng-show="currentpage==3">
+                        <div ng-show="currentpage==3">
+                            <span style="text-align:left">
                             {{pagetext.selectedCategory}} <br />
-                            {{pagetext.selectedOption}}
-                            <div ng-bind-html-unsafe="pagetext.clueOptions[pagetext.selectedCategory][pagetext.selectedOption].clue">
-                            </div>
-                            <div id="ansTyped">
-                                <form>                                    
-                                <input type="text" ng-model="pagetext.currentAnswer" />
-                                    <input type="submit" value="Validate" id="validateAns"
-                                        ng-click="validateAnswer(pagetext.currentAnswer)" />
-                                </form>
+                            Clue No: {{pagetext.selectedOption}}
+                            </span>
+                            <div id="answer_clue_wrap" >
+                                <div ng-bind-html-unsafe="pagetext.clueOptions[pagetext.selectedCategory][pagetext.selectedOption].clue">
+                                </div>
+                                <div id="ansTyped">
+                                    <form>                                    
+                                    <input type="text" ng-model="pagetext.currentAnswer" />
+                                        <input type="submit" value="Validate" id="validateAns"
+                                            ng-click="validateAnswer(pagetext.currentAnswer)" />
+                                    </form>
+                                </div>
                             </div>
                         </div>
 
