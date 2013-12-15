@@ -2,49 +2,44 @@
                     "Puzzles/Riddles": {
                         1: { clue: "I am a Halogen, Mostly yellow-green, I may not be so nobel, But I am all of seventeen.", answer: "Chlorine" },
                         2: { clue: "Brothers and sisters, I have none. But this man's father is my father's son. Who is this man?", answer: "Son" },
-                        3: { clue: "Identify this character and the series.  Enter Character'sName-SeriesName <img src='stylesheets/c1-q3.jpg' />", answer: "Gunther-FRIENDS" },
+                        3: { clue: "Identify this character and the series.  Enter Character'sName-SeriesName <img src='stylesheets/c1-q3.jpg' /> Reach out to 'Ring Tosss' stall with the answer and play the game to get the Chit which has the answer to be keyed in.", answer: "We got it" },
                         4: { clue: "If you have me, you want to share me. If you share me, you haven't got me. What am I?", answer: "Secret" },
                         5: { clue: "Two old men are sitting in front of two doors. One doors leads to freedom the other one leads to jail. The two men know the secret of the doors. One of the men is always lying the other one is always telling the truth. You can ask only one question to one man before deciding which door you will go through... " +
-"What is your question ?  	Ans : A good question could be Is the liar in front of the door to freedom ?" +
-"If you ask it to the liar and if he is in front of the door to freedom, he will say NO. " + 
-"If you ask it to the truthful man and if he is in front of the door to freedom, he will say NO. " + 
-"If you ask it to the liar and if he is in front of the door to jail, he will say YES. " + 
-"If you ask it to the truthful man and if he is in front of the door to jail, he will say YES." +  
-"Therefore you take the door of the man saying NO" + 
+"What is your question ?  	+ 
 "When you get the answer, reach out to Vishal Shah to get the answer.", answer: "Damn Lucky"
                         },
                     },
                     "@Work -1": {
 
-                        1: { clue: "Sabse filmy * 10 = whose extension?", answer: "Mailroom 1048" },
-                        2: { clue: "Synonyms of light are their names, name 5 people on our floor. (reach to Vishal with their names - Perfect)", answer: "Perfect" },
-                        3: { clue: "This MSWIM colleague – one of the Refresh blog editors – has his email id’s (mind it, not the name’s) initials as a popular certification amongst managers.", answer: "Punit.Maharajkrishan.Puri@ms.com" },
+                        1: { clue: "Sabse filmy * 10 = whose extension? Reach out to Stall with the answer - Idli Dosa Sambar Chutney and play the game to get the chit with the answer to be keyed in.", answer: "Mailroom" },
+                        2: { clue: "Synonyms of light are their names, name 5 people on our floor. (reach to Vishal Shah with their Full names)", answer: "Perfect" },
+                        3: { clue: "This MSWIM colleague – one of the Refresh blog editors – has his email id’s (mind it, not the name’s) initials as a popular certification amongst managers. Reach out to him to get the chit with the answer to be keyed in.", answer: "PMP" },
                         4: { clue: "Name of the application used to manage Real Estate investment business pipeline?", answer: "PRISM" },
-                        5: { clue: "Which two applications have a Patent/Pending Patent? Enter each application seperated by comma without space in between.", answer: "BEAM,DSP" },
+                        5: { clue: "Which two applications have a Patent/Pending Patent? Enter each application separated by comma without space in between.", answer: "BEAM,DSP" },
                     },
                     "@Work -2": {
 
-                        1: { clue: "Recently launched firm initiative which has a 3 letter Go-to URL with a number in between – ", answer: "e2D" },
-                        2: { clue: "\"Execute in a way that is consistent with our values and, whenever possible, deliver more than “my” part of the Firm.\". What is this & Who said it? ", answer: "Never give up" },
-                        3: { clue: "Launched recently to let you know more about yourself. It is all about you.", answer: "me@MS" },
-                        4: { clue: "Speciality of firm associated charity building in NY which recently saw June month for the 10th time?", answer: "We are about People" },
-                        5: { clue: "How many client correspondence transactions does PERT handle every month? Give the average number. Reach out to the new EPS WMT Lead to get the answer to be keyed in. ", answer: "Million" },
+                        1: { clue: "Recently launched firm initiative which has a 3 letter Go-to URL with a number in between. Reach out to WMTIMT PMO lead with the right answer to get the answer to be keyed in.  ", answer: "Deliver" },
+                        2: { clue: "\"Execute in a way that is consistent with our values and, whenever possible, deliver more than “my” part of the Firm.\". What is this & Who said it? Reach out to WMTIMT MSAS Lead with the right answer to get the answer to be keyed in.", answer: "Never give up" },
+                        3: { clue: "Launched recently to let you know more about yourself. It is all about you.(Enter only the alias without http://)", answer: "me@MS" },
+                        4: { clue: "Speciality of firm associated charity building in NY which recently saw June month for the 10th time? Reach out to WMTIMT Philanthropy lead with the right answer to get the answer to be keyed in.", answer: "We are about People" },
+                        5: { clue: "How many client correspondence transactions does PERT handle every month? Give the average number. Reach out to the new MSAS PERT Lead with the right answer to get the answer to be keyed in. ", answer: "Million" },
                     },
                     "Sports": {
 
-                        1: { clue: "I have earned highest number of individual gold medals in olympic, the number is double the second highest. People call me half man half fish. Michael Phelps. Reach out to Suswar to get the answer to be keyed in", answer: "NqGSqFQbYknzBQka3T0bLJ1Q1Xs=" },
-                        2: { clue: "We have been supplying balls for the Wimbledon from year 1902. <img src='stylesheets/c4-q2.jpg'/>", answer: "58N/Lkt+ZPvrtzUp7MmaZ2O+QFM=" },
-                        3: { clue: "Fastest Indian to complete 100 wickets in Tests History.", answer: "L347CupDNcmjBlwsbmtrXbz8EmQ=" },
-                        4: { clue: "22-year-old young Norwegian who won major sporting event in 2013 by defeating India’s NIIT ambassador. Enter first name, last name", answer: "BVWomzU1UMGs9+4AFZlBpapQPFw=" },
-                        5: { clue: "He was born (in Argentina) of parents who belonged to middle class origin. He had growth hormone deficiency detected at the age of 11. Currently he is amongst the best in his sport. His team mates nicknamed him as \"The flea\". His first contract was signed on a napkin. Reach out to Varun Joshi to get the answer", answer: "lg5FDfbXAq9apuxuNHthfThUPnE=" },
+                        1: { clue: "I have earned highest number of individual gold medals in olympic, the number is double the second highest. People call me half man half fish. Reach out to Suswar to get the answer to be keyed in", answer: "Phelps" },
+                        2: { clue: "We have been supplying balls for the Wimbledon from year 1902. <img src='stylesheets/c4-q2.jpg'/>", answer: "Slazenger" },
+                        3: { clue: "Fastest Indian to complete 100 wickets in Tests History. reach out to the stall Stumped & Bowled with the right answer and play the game to get the answer to be keyed in.", answer: "AshwinR" },
+                        4: { clue: "22-year-old young Norwegian who won major sporting event in 2013 by defeating India’s NIIT ambassador. Enter first name and last name comma separated by space", answer: "Magnus Carlsen" },
+                        5: { clue: "He was born (in Argentina) of parents who belonged to middle class origin. He had growth hormone deficiency detected at the age of 11. Currently he is amongst the best in his sport. His team mates nicknamed him as \"The flea\". His first contract was signed on a napkin. Reach out to this colleague who plays for MSAS Football team to get the answer", answer: "MessiL" },
 
                     },
                     "Technology": {
-                        1: { clue: "Identify him . He is not very famous.But founder of a famous website Hint : Take a close look at this face. <img src='stylesheets/c5-q1.jpg' />", answer: "NqGSqFQbYknzBQka3T0bLJ1Q1Xs=" },
-                        2: { clue: "There was once a man named Galileo who had great grandson named Juno. What are we talking about?", answer: "58N/Lkt+ZPvrtzUp7MmaZ2O+QFM=" },
-                        3: { clue: "I can fly up and down, backwards, left and right, and even upside down. I am also an algorithm which claims that search can be more human while interacting with user and provide direct answers. What am I?", answer: "L347CupDNcmjBlwsbmtrXbz8EmQ=" },
-                        4: { clue: "Changing logo on the most visited website in the world is called?", answer: "BVWomzU1UMGs9+4AFZlBpapQPFw=" },
-                        5: { clue: "Identify the below person? Enter FirstName LastName.", answer: "lg5FDfbXAq9apuxuNHthfThUPnE=" },
+                        1: { clue: "Identify him . He is not very famous.But founder of a famous website Hint : Take a close look at this face. <img src='stylesheets/c5-q1.jpg' /> Enter his first name last name separated by space", answer: "Eduardo Saverin" },
+                        2: { clue: "There was once a man named Galileo who had great grandson named Juno. What are we talking about? Two words separated by spaces", answer: "Eclipse IDE" },
+                        3: { clue: "I can fly up and down, backwards, left and right, and even upside down. I am also an algorithm which claims that search can be more human while interacting with user and provide direct answers. What am I? Two words separated by space", answer: "Humming bird" },
+                        4: { clue: "Changing logo on the most visited website in the world is called?", answer: "doodle"},
+                        5: { clue: "Identify the below person? Enter FirstName LastName.", answer: "Steve Ballmer" },
 
                     },
 
