@@ -1,12 +1,15 @@
 CACHE MANIFEST
-# v.1.18
+# v.1.19
 
 offsite.html
-javascripts/main.js
 javascripts/offsite.js
 stylesheets/offsite.css
 stylesheets/bg.jpg
-stylesheets/icon-new.png
+stylesheets/c1-q3.jpg
+stylesheets/c4-q2.jpg
+stylesheets/c5-q1.jpg
+stylesheets/c5-q5.jpg
+stylesheets/icon-new.jpg
 stylesheets/c4-q6.jpg
 
 NETWORK:
