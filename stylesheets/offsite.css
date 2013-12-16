@@ -7,14 +7,14 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
-    font-family: cursive;
+    font-family: Georgia;
     margin: 0px;
     padding: 0;
     text-shadow: 2px 2px #3B0B0B;
 }
 
 input {
-    font-family: cursive;
+    font-family: Georgia;
     height: 30px;
 }
 
@@ -31,12 +31,13 @@ input {
 }
 
 #maincontent {
-    font-family: cursive;
+    font-family: Georgia;
     text-shadow: 2px 2px #3B0B0B;
+    
 }
 
 #successmsg {
-    font-family: cursive;
+    font-family: Georgia;
     color: #86B404;
     background: rgba(59,11, 11, 0.60);
     width: 90%;
@@ -52,7 +53,7 @@ input {
 #prestart_content {
     color: #3ADF00;
     background: rgba(28,28, 28, 0.80);
-    font-family: cursive;
+    font-family: Georgia;
     border-radius: 10px;
     width: 80%;
     margin-left: 10%;
@@ -104,7 +105,7 @@ input {
     padding: 5px;
     text-align: center;
     color: #B43104;
-    font-family: cursive;
+    font-family: Georgia;
     text-shadow: 2px 2px #3B0B0B;
     font-weight: bold;
 }
