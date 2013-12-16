@@ -28,24 +28,40 @@
     <div id="main_content_wrap" class="main_content ">
         <div id="content_container">
             <div id="prestart_content">
-                <div style="font-size:12px">Welcome to Treasure Hunt 2013.
+                <div style="font-size:12px;padding:3px;">Welcome to Treasure Hunt 2013.
                     <br /> <br />
-                    <div style="text-align:left">
-                    Rules of the Game - <br />
-                    * Select among the 6 categories. <br />
-                    * Select the clues given in each category. <br />
-                    * Each player gets to attempt one clue at a time <br />
-                    * Play with your team to solve the maximum number of clues. <br />
+                    <div style="text-align:left" ng-hide="prepage1">
+                        <table>
+                            <tr><td><b>Venue</b>:</td><td>Westin</td></tr>
+                            <tr><td><b>Time</b>:</td><td>3 pm onwards</td></tr>
+                            <tr><td><b>Transportation</b>:</td><td>Bus leaves office at 2.30 pm, or reach venue by your own means by 3pm.</td></tr>
+                            <tr><td></td><td></td></tr>                            
+                        </table>
+                        <br />
+                        <span style="float:right" ng-click="prepage1=2">Rules &gt;&gt;</span>
+                        <br />
+                    </div>
 
-                    <br />
-                    Milestones: <br />
-                    * First 10 clues solved by the team. <br />
-                    * All clues of any one category solved by the team. <br />
-                    * Solve all clues and get to the treasure. <br />
+                    <div style="text-align:left" ng-show="prepage1">
+                        Rules of the Game - <br />
+                        * Select among the 6 categories. <br />
+                        * Select the clues given in each category. <br />
+                        * Each player gets to attempt one clue at a time <br />
+                        * Play with your team to solve the maximum number of clues. <br />
+                        * Solve the anagram and the Treasure is yours <br />
 
-                    <br />
-                    Clue: <br />
-                    * The more the number of devices in a team, more are the chances to win.                    
+                        <br />
+                        Milestones: <br />
+                        * First 10 clues solved by the team. <br />
+                        * All clues of any one category solved by the team. <br />
+                        * Solve all clues and get the anagram. <br />
+
+                        <br />
+                        Clue: <br />
+                        * The more the number of devices in a team, more are the chances to win.                    
+                        <br />
+                        <span style="float:right" ng-click="prepage1=null">&lt;&lt; Back</span>
+                        <br />
                     </div>
                 </div>
                 <div>Your hunt starts in </div>
@@ -89,13 +105,16 @@
                             Clue No: {{pagetext.selectedOption}}
                             </span>
                             <div id="answer_clue_wrap" style="font-size:15px;" >
-                                <div style="text-align:left" ng-bind-html-unsafe="pagetext.clueOptions[pagetext.selectedCategory][pagetext.selectedOption].clue">
+                                <div style="text-align:left;padding:4px" ng-bind-html-unsafe="pagetext.clueOptions[pagetext.selectedCategory][pagetext.selectedOption].clue">
                                 </div>
                                 <div id="ansTyped">
                                     <form>                                    
                                     <input type="text" ng-model="pagetext.currentAnswer" />
                                         <input type="submit" value="Validate" id="validateAns"
                                             ng-click="validateAnswer(pagetext.currentAnswer)" />
+                                        
+                                        <input type="submit" value="Back" id="back" ng-click="goback()" />
+
                                     </form>
                                 </div>
                             </div>
@@ -140,7 +159,7 @@
     <script>
         
         function StartCountDown() {
-            var target_date = new Date().getTime() + 15000;
+            var target_date = new Date().getTime() + 10000;
             var refreshIntervalId = setInterval(function () {
 
                 var days = 0, hours = 0, minutes = 0, seconds = 0;
@@ -168,6 +187,11 @@
         }
 
         function GameController($scope) {
+            $scope.goback = function () {
+                $scope.currentpage = 2;
+            }
+
+
             $scope.passCode = null;
             //category -1 ,ques-opt -2 , original ques -3
             $scope.currentpage = 1;
