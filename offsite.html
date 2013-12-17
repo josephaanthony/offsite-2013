@@ -157,8 +157,8 @@
 
     <script>
         function StartCountDown() {
-            var e = new Date().getTime()
-            //var e = new Date("Dec 17 2013 15:30:00 GMT+0530").getTime()
+            //var e = new Date().getTime()
+            var e = new Date("Dec 17 2013 15:30:00 GMT+0530").getTime()
                 , t = setInterval(function () {
                 var s = 0, o = 0, c = 0, a = 0, p = (new Date).getTime(), n = (e - p) / 1e3
                 s = parseInt(n / 86400), n %= 86400, o = parseInt(n / 3600), n %= 3600, c = parseInt(n / 60), a = parseInt(n % 60), 0 >= a && 0 >= o && 0 >= c && 0 >= s && ($("#prestart_content").fadeOut(150), $("#poststart_content").fadeIn(1e3), clearInterval(t)), $("#countdown_wrap").text(s + "d: " + o + "h: " + c + "m: " + a + "s")
